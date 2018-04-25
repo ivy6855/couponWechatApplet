@@ -1,1 +1,31 @@
 /* pages/search/index.wxss */
+.container{
+  min-height: 100%;
+}
+.search-container{
+  width: 750rpx;
+  height: 350rpx;
+  text-align: center;
+  padding-top:50rpx;
+  /* background: linear-gradient(top, #EA5952, #ED835C); */
+  background: #ED6F58;
+}
+.search-box{
+  width: 650rpx;
+  background-color: #FFFFFF;
+  border-radius: 30rpx;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  padding-top:auto;
+  padding-left:20rpx;
+  padding-bottom:auto;
+  margin:auto;
+  height:60rpx;
+}
+.search-box input{
+
+  font-size: 12px;
+  width: 500rpx;
+  padding-left:20rpx;
+}

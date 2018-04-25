@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "天天折扣券"
+  "navigationBarTitleText": "天天折扣券",
+  "navigationBarBackgroundColor": "#EB605A",
+  "navigationBarTextStyle": "#FFF"
 }

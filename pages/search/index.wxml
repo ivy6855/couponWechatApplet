@@ -1,2 +1,13 @@
 <!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<view class="container">
+  <view class="search-container">
+    <view style="font-size:36px;color:#FFFFFF;">天天折扣券</view>
+    <view style="font-size:14px;font-weight:400;margin-top:20rpx;color:#FFFFFF;">最全的折扣券平台</view>
+    <view class="search-box" style="margin-top:60rpx;">
+      <icon type="search" size="16" style="" color="#76707C"/>
+      <input placeholder="粘贴宝贝标题，先领券，在购物"/>
+    </view>
+  </view>
+
+
+</view>
