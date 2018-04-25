@@ -1,0 +1,45 @@
+<view class="container">
+  <view class="swiper-container">
+    <swiper class="swiper_box" 
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <block wx:for="{{banners}}" wx:key="id">
+          <swiper-item>
+              <image bindtap="tapBanner" data-id="{{item.id}}" src="{{item.imageUrl}}"/>
+          </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">  
+      <block wx:for="{{banners}}" wx:key="unique">  
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+      </block>  
+    </view> 
+  </view>
+  <view class="type-container">
+    <block wx:for="{{types}}" wx:key="id">
+      <view class="type-box">
+        <image data-id="{{item.id}}" src="{{item.imageUrl}}"/>
+        <view>{{item.type}}</view>
+      </view>
+    </block> 
+  </view>
+  <view class="search-container">
+    <icon type="search" size="16" style="" color="#76707C"/>
+    <input placeholder="粘贴宝贝标题，先领券，在购物"/>
+  </view>
+
+  <view class="goods-container">
+    <block wx:for="{{goods}}" wx:key="id">
+      <view class="goods-box">
+        <image data-id="{{item.id}}" src="{{item.smallImages}}" />
+        <view class="goods-info">
+          <view class="goods-title">{{item.title}}</view>
+          <view class="goods-price">到手价{{item.zkFinalPrice}}</view>
+          <view class="coupon-info">
+            <view class="goods-coupon">领券{{item.couponInfo}}</view>
+            <view class="goods-volume">{{item.platform}}销量{{item.volume}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
