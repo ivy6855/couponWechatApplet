@@ -1,4 +1,7 @@
 // pages/my/index.js
+const utils = require("../../utils/util.js");
+const app = getApp();
+
 Page({
 
   /**
@@ -12,7 +15,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    const self = this;
+    wx.getUserInfo({
+      success: function (res) {
+        var userInfo = res.userInfo;
+        console.log(userInfo)
+        self.setData({
+          userInfo: userInfo
+        })
+      }
+    })
   },
 
   /**

@@ -14,48 +14,53 @@ const banners = [{
   imageUrl: "/images/banner03.jpg"
 }];
 
-const types=[
+const types = [
   {
-    id:1,
-    type:'优质新品',
-    imageUrl:'/images/types/01-new.png',
-  }, {
-    id: 2,
-    type: '潮流女装',
+    cid: 0,
+    imageUrl: '/images/types/10-all.png',
+  },{
+    cid: 1,
     imageUrl: '/images/types/02-women.png',
   }, {
-    id: 3,
-    type: '男装',
+    cid: 2,
     imageUrl: '/images/types/03-man.png',
   }, {
-    id: 4,
-    type: '品牌精选',
-    imageUrl: '/images/types/04-brand.png',
-  }, {
-    id: 5,
-    type: '人气美鞋',
-    imageUrl: '/images/types/05-shoes.png',
-  }, {
-    id: 6,
-    type: '箱包',
-    imageUrl: '/images/types/06-bag.png',
-  }, {
-    id: 7,
-    type: '护肤美妆',
+    cid: 3,
+    imageUrl: '/images/types/02-women.png',
+  },  {
+    cid: 4,
     imageUrl: '/images/types/07-beauty.png',
   }, {
-    id: 8,
-    type: '家用电器',
+    cid: 5,
+    imageUrl: '/images/types/07-beauty.png',
+  }, {
+    cid: 6,
+    imageUrl: '/images/types/05-shoes.png',
+  }, {
+    cid: 7,
+    imageUrl: '/images/types/06-bag.png',
+  }, {
+    cid: 8,
+    imageUrl: '/images/types/06-bag.png',
+  }, {
+    cid: 9,
     imageUrl: '/images/types/08-appliance.png',
   }, {
-    id: 9,
-    type: '手机数码',
+    cid: 10,
     imageUrl: '/images/types/09-phone.png',
   }, {
-    id: 10,
-    type: '全部',
+    cid: 11,
     imageUrl: '/images/types/10-all.png',
-  },
+  }, {
+    cid: 12,
+    imageUrl: '/images/types/10-all.png',
+  }, {
+    cid: 13,
+    imageUrl: '/images/types/10-all.png',
+  }, {
+    cid: 14,
+    imageUrl: '/images/types/10-all.png',
+  }
 ]
 
 const coupons = [
@@ -170,6 +175,15 @@ Page({
     //优惠券
     getCouponsByPage(self,1);
 
+    //菜单
+    utils.requestGet("coupon/wechat/main/menu", {}, function (res) {
+      let menus = res.data;
+      for(let i=0;i<menus.length;i++){
+        menus[i]["imageUrl"] = types[menus[i].cid]["imageUrl"];
+      }
+      menus.push({ cid: 13, name: '全部', imageUrl:'/images/types/10-all.png'})
+      self.setData({ types: menus})
+    })
   },
 
   /**

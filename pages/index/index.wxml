@@ -14,14 +14,16 @@
       </block>  
     </view> 
   </view>
-  <view class="type-container">
+
+  <view class="type-container" scroll-x="true">
     <block wx:for="{{types}}" wx:key="id">
       <view class="type-box">
-        <image data-id="{{item.id}}" src="{{item.imageUrl}}"/>
-        <view>{{item.type}}</view>
+        <image data-id="{{item.cid}}" src="{{item.imageUrl}}"/>
+        <view>{{item.name}}</view>
       </view>
-    </block> 
+    </block>
   </view>
+
   <view class="search-container">
     <icon type="search" size="16" style="" color="#76707C"/>
     <input placeholder="粘贴宝贝标题，先领券，在购物"/>
