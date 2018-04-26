@@ -234,10 +234,7 @@ Page({
     }) 
   },
   couponTap:function(e){
-    console.log(e);
     const navigateUrl = e.currentTarget.dataset.url;
-    // console.log(escape(navigateUrl).replace(/\+/g, '%2B').replace(/\"/g, '%22').replace(/\'/g, '%27').replace(/\//g, '%2F'))
-    // return false
     wx.navigateTo({
       url: '/pages/detail/index?url=' + escape(navigateUrl),
     })
