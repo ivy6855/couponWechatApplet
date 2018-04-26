@@ -1,4 +1,8 @@
 // pages/index2/index.js
+const utils = require("../../utils/util.js");
+const app = getApp();
+
+
 const banners = [{
   id: 1,
   imageUrl: "/images/banner01.jpg"
@@ -54,7 +58,7 @@ const types=[
   },
 ]
 
-const goods = [
+const coupons = [
   {
     numIid:1,
     title:'iphone新款防爆钢化膜',
@@ -106,12 +110,44 @@ const goods = [
   }
 ]
 
+const PAGE_LIMIT = 20;
+const getCouponsByPage = function (that, page) {
+  let q_page = page || 1;
+  if (that.data.onAjax) {
+    return false;
+  }
+  if (that.data.pageCount && that.data.pageCount < q_page) {
+    that.setData({ nomoreDisplay: 'block' });
+    return false;
+  }
+  var params = {
+    start: (q_page - 1) * PAGE_LIMIT,
+    limit: PAGE_LIMIT
+    // id: app.globalData.USER_ID
+  }
+
+  wx.showLoading({
+    mask: true
+  });
+  that.setData({ onAjax: true, loadmoreDisplay: 'block' })
+  utils.requestGet("coupon/wechat/main/coupons", params, function (resp) {
+    that.setData({ onAjax: false, loadmoreDisplay: 'none' })
+    wx.hideLoading();
+    if (resp.state != 'success') {
+      return false;
+    }
+    var coupons = that.data.coupons.concat(resp.data.dataList);
+    that.setData({ coupons: coupons, currentPage: resp.data.currentPage, pageCount: resp.data.pageCount });
+  });
+}
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    onAjax:false,
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -119,14 +155,21 @@ Page({
     swiperCurrent:0,
     banners:banners,
     types:types,
-    goods: goods
+    coupons: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    const self = this;
+    //banners
+    utils.requestGet("coupon/wechat/main/banner",{},function(res){
+      console.log(res)
+    })
+    //优惠券
+    getCouponsByPage(self,1);
+
   },
 
   /**
@@ -168,7 +211,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    console.log(11)
+    var queryPage = this.data.currentPage + 1;
+    if (queryPage > this.data.totalPage) {
+      //已经是最后一页了
+      return false;
+    }
+
+    console.log("加载分页")
+    getCouponsByPage(this, queryPage)
   },
 
   /**
@@ -181,5 +232,14 @@ Page({
     this.setData({
       swiperCurrent: e.detail.current
     }) 
+  },
+  couponTap:function(e){
+    console.log(e);
+    const navigateUrl = e.currentTarget.dataset.url;
+    // console.log(escape(navigateUrl).replace(/\+/g, '%2B').replace(/\"/g, '%22').replace(/\'/g, '%27').replace(/\//g, '%2F'))
+    // return false
+    wx.navigateTo({
+      url: '/pages/detail/index?url=' + escape(navigateUrl),
+    })
   }
 })

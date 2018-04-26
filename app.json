@@ -1,9 +1,10 @@
 {
   "pages":[
-    "pages/search/index",
     "pages/index/index",
+    "pages/search/index",
     "pages/histroy/index",
-    "pages/my/index"
+    "pages/my/index",
+    "pages/detail/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

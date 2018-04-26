@@ -28,9 +28,11 @@
   </view>
 
   <view class="goods-container">
-    <block wx:for="{{goods}}" wx:key="id">
+    <block wx:for="{{coupons}}" wx:key="id">
       <view class="goods-box">
-        <image data-id="{{item.id}}" src="{{item.smallImages}}" />
+        <image data-id="{{item.id}}"
+           data-url="{{item.itemUrl}}"
+           src="{{item.pictUrl}}" bindtap='couponTap' />
         <view class="goods-info">
           <view class="goods-title">{{item.title}}</view>
           <view class="goods-price">到手价{{item.zkFinalPrice}}</view>

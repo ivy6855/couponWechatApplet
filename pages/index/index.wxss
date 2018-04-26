@@ -97,7 +97,7 @@ swiper-item image {
 }
 .goods-box{
   width: 370rpx;
-  height: 500rpx;
+  height: 580rpx;
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 10rpx;
