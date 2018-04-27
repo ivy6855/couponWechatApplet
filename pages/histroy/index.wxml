@@ -1,2 +1,14 @@
 <!--pages/histroy/index.wxml-->
-<text>pages/histroy/index.wxml</text>
+<view class="container">
+<block wx:for="{{accessLogs}}"  wx:key="id">
+  <view class="access-box">
+    <view class="image-box">
+      <image src="{{item.coupon.pictUrl}}"></image>
+    </view>
+    <view class="info-box">
+      <view class="title">{{item.coupon.title}}</view>
+      <view class="coupon"></view>
+    </view>
+  </view>
+</block>
+</view>

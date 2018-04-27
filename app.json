@@ -1,9 +1,9 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/histroy/index",
     "pages/my/index",
     "pages/search/index",
-    "pages/histroy/index",
     "pages/detail/index"
   ],
   "window":{

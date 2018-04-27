@@ -17,7 +17,7 @@
 
   <view class="type-container" scroll-x="true">
     <block wx:for="{{types}}" wx:key="id">
-      <view class="type-box">
+      <view class="type-box"data-id="{{item.cid}}" bindtap="menuTabHandle">
         <image data-id="{{item.cid}}" src="{{item.imageUrl}}"/>
         <view>{{item.name}}</view>
       </view>
@@ -30,17 +30,21 @@
   </view>
 
   <view class="goods-container">
-    <block wx:for="{{coupons}}" wx:key="id">
+    <block wx:for="{{coupons}}" wx:key="numIid">
       <view class="goods-box">
-        <image data-id="{{item.id}}"
-           data-url="{{item.itemUrl}}"
-           src="{{item.pictUrl}}" bindtap='couponTap' />
-        <view class="goods-info">
+        <view>
+          <image data-id="{{item.numIid}}"
+            data-url="{{item.itemUrl}}"
+            src="{{item.pictUrl}}" bindtap='couponTap' />
           <view class="goods-title">{{item.title}}</view>
-          <view class="goods-price">到手价{{item.zkFinalPrice}}</view>
-          <view class="coupon-info">
-            <view class="goods-coupon">领券{{item.couponInfo}}</view>
-            <view class="goods-volume">{{item.platform}}销量{{item.volume}}</view>
+        </view>
+        <view class="goods-info">
+          <view class="goods-price" style="margin-bottom:10rpx;">到手价{{item.zkFinalPrice}}</view>
+          <view>
+            <view class="coupon-info">
+              <view class="goods-coupon">领券{{item.couponInfo}}</view>
+              <view class="goods-volume">{{item.platform}}销量{{item.volume}}</view>
+            </view>
           </view>
         </view>
       </view>

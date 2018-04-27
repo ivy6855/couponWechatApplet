@@ -97,18 +97,26 @@ swiper-item image {
 }
 .goods-box{
   width: 370rpx;
-  height: 580rpx;
+  height: 560rpx;
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 10rpx;
-  font-size: 14px;
+  font-size: 12px;
+  display: flex;
+  flex-direction:column;
+  justify-content: space-between;
 }
 .goods-box image{
   width: 370rpx;
   height: 370rpx;
 }
+.goods-box .goods-title{
+  padding: 0 10rpx;
+}
 .goods-box .goods-info{
-  padding: 0 20rpx;
+  padding: 0 10rpx;
+  display: flex;
+  flex-direction:column;
 }
 .goods-box .coupon-info{
   display: flex;

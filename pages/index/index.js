@@ -116,7 +116,7 @@ const coupons = [
 ]
 
 const PAGE_LIMIT = 20;
-const getCouponsByPage = function (that, page) {
+const getCouponsByPage = function (that, page,cType) {
   let q_page = page || 1;
   if (that.data.onAjax) {
     return false;
@@ -130,6 +130,9 @@ const getCouponsByPage = function (that, page) {
     limit: PAGE_LIMIT
     // id: app.globalData.USER_ID
   }
+  if (cType){
+    params["category"] = cType;
+  }
 
   wx.showLoading({
     mask: true
@@ -141,7 +144,11 @@ const getCouponsByPage = function (that, page) {
     if (resp.state != 'success') {
       return false;
     }
-    var coupons = that.data.coupons.concat(resp.data.dataList);
+    var coupons = resp.data.dataList;
+    if (page>1){
+      coupons = that.data.coupons.concat(coupons);
+    }
+    // var coupons = that.data.coupons.concat(resp.data.dataList);
     that.setData({ coupons: coupons, currentPage: resp.data.currentPage, pageCount: resp.data.pageCount });
   });
 }
@@ -177,7 +184,7 @@ Page({
 
     //菜单
     utils.requestGet("coupon/wechat/main/menu", {}, function (res) {
-      let menus = res.data;
+      let menus = res.data||[];
       for(let i=0;i<menus.length;i++){
         menus[i]["imageUrl"] = types[menus[i].cid]["imageUrl"];
       }
@@ -225,15 +232,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log(11)
+    const self = this;
     var queryPage = this.data.currentPage + 1;
     if (queryPage > this.data.totalPage) {
       //已经是最后一页了
       return false;
     }
-
     console.log("加载分页")
-    getCouponsByPage(this, queryPage)
+    getCouponsByPage(this, queryPage, self.data.catalog)
   },
 
   /**
@@ -252,5 +258,12 @@ Page({
     wx.navigateTo({
       url: '/pages/detail/index?url=' + escape(navigateUrl),
     })
+  },
+  menuTabHandle:function(e){
+    console.log(e);
+    const self = this;
+    const cid = e.currentTarget.dataset.id;
+    self.setData({catalog:cid});
+    getCouponsByPage(self,1,cid);
   }
 })
