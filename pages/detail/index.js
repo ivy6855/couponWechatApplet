@@ -1,18 +1,53 @@
 // pages/detail/index.js
+const utils = require("../../utils/util.js");
+const app = getApp();
+
+const banners = [{
+  id: 1,
+  pictUrl: "/images/banner01.jpg"
+}, {
+  id: 2,
+  pictUrl: "/images/banner02.jpg"
+}, {
+  id: 3,
+  pictUrl: "/images/banner03.jpg"
+}];
+
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    detailUrl:''
+    indicatorDots: true,
+    autoplay: true,
+    interval: 3000,
+    banners:banners,
+    itemcoupon:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({ detailUrl:unescape(options.url)})
+    const self = this;
+    const numIid = options.id;
+    utils.requestGet("coupon/wechat/itemcoupon/" + numIid, {}, function (res) {
+      console.log(res)
+      if(res.state !="success"){
+        wx.showToast({
+          title: '加载失败',
+          icon: 'fail',
+          duration: 2000
+        })
+      }
+      const itemcoupon = res.data;
+      self.setData({ itemcoupon: itemcoupon});
+      let pics = [];
+      pics.push({ pictUrl: itemcoupon.pictUrl, id: itemcoupon.numIid});
+      self.setData({ banners: pics});
+    })
   },
 
   /**

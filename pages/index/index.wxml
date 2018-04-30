@@ -24,22 +24,32 @@
     </block>
   </view>
 
-  <view class="search-container">
-    <icon type="search" size="16" style="" color="#76707C"/>
-    <input placeholder="粘贴宝贝标题，先领券，在购物"/>
+  <view class="search-container {{onQuery?'active':''}}">
+    <view class="query {{onQuery?'active':''}}">
+      <icon type="search" size="16" style="margin-top:15rpx;margin-left:15rpx;" color="#76707C"/>
+      <input placeholder="粘贴宝贝标题，先领券，在购物" class="{{onQuery?'active':''}}"   
+            bindfocus="queryFocusHandle"
+            value="{{queryValue}}"
+            bindconfirm="queryHandle"/>
+    </view>
+    <view wx:if="{{onQuery}}" style="margin-left:20rpx"
+       class="cancel" bindtap="cancelQueryHandle">取消</view>
   </view>
-
+  <view class="search-bg" wx:if="{{onQuery}}"></view>
   <view class="goods-container">
     <block wx:for="{{coupons}}" wx:key="numIid">
-      <view class="goods-box">
+      <view class="goods-box"
+        data-id="{{item.numIid}}"
+        data-url="{{item.itemUrl}}"
+        bindtap='couponTap' 
+      >
         <view>
-          <image data-id="{{item.numIid}}"
-            data-url="{{item.itemUrl}}"
-            src="{{item.pictUrl}}" bindtap='couponTap' />
+          <image 
+            src="{{item.pictUrl}}"/>
           <view class="goods-title">{{item.title}}</view>
         </view>
         <view class="goods-info">
-          <view class="goods-price" style="margin-bottom:10rpx;">到手价{{item.zkFinalPrice}}</view>
+          <view class="goods-price" style="margin-bottom:5rpx;">到手价{{item.zkFinalPrice}}</view>
           <view style="margin-bottom:10rpx;">
             <view class="coupon-info">
               <view class="goods-coupon">领券{{item.couponInfo}}</view>
@@ -49,5 +59,9 @@
         </view>
       </view>
     </block>
+  </view>
+  <view class="my-loading" wx:if="{{loading}}">
+    <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>
+    <text>努力加载中...</text>
   </view>
 </view>

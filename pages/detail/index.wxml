@@ -1,1 +1,38 @@
-<web-view src="{{detailUrl}}"></web-view>
+<view class="container">
+  <view class="swiper-container">
+    <swiper class="swiper_box" 
+                autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+      <block wx:for="{{banners}}" wx:key="id">
+          <swiper-item>
+              <image bindtap="tapBanner" data-id="{{item.id}}" src="{{item.pictUrl}}"/>
+          </swiper-item>
+      </block>
+    </swiper>
+    <view class="dots">  
+      <block wx:for="{{banners}}" wx:key="unique">  
+        <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+      </block>  
+    </view> 
+  </view>
+  <view class="goods-info">
+    <view class="good-title">{{itemcoupon.title}}</view>
+    <view class="flex-space-row">
+      <view>
+        <view class="coupon-tag">券后价</view>
+        <view class="coupon-price">¥{{itemcoupon.zkFinalPrice}}</view>
+      </view>
+      <view class="fr coupon-total">{{itemcoupon.volume}}已买</view>
+    </view>
+  </view>
+
+  <view class="coupon-con">
+    <view class="coupon-paper">
+      <view class="dotted l"></view>
+      <view class="dotted r"></view>
+      <view class="paper">
+        <text>{{itemcoupon.couponInfo}}元优惠券</text>
+      </view>
+      <view class="get">立即领券</view>
+    </view>
+  </view>
+</view>

@@ -1,7 +1,12 @@
 // pages/index2/index.js
 const utils = require("../../utils/util.js");
 const app = getApp();
-
+// {
+//   "pagePath": "pages/histroy/index",
+//     "iconPath": "images/nav/histroy-off.png",
+//       "selectedIconPath": "images/nav/histroy-on.png",
+//         "text": "最近浏览"
+// },
 
 const banners = [{
   id: 1,
@@ -58,62 +63,62 @@ const types = [
     cid: 13,
     imageUrl: '/images/types/10-all.png',
   }, {
-    cid: 14,
+    cid: null,
     imageUrl: '/images/types/10-all.png',
   }
 ]
 
-const coupons = [
-  {
-    numIid:1,
-    title:'iphone新款防爆钢化膜',
-    smallImages:'/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform:'天猫',//所属平台
-    couponInfo:'100',//优惠券面额
-    zkFinalPrice:'199.00'//折扣价
-  }, {
-    numIid: 2,
-    title: 'iphone新款防爆钢化膜',
-    smallImages: '/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform: '天猫',//所属平台
-    couponInfo: '100',//优惠券面额
-    zkFinalPrice: '199.00'//折扣价
-  }, {
-    numIid: 3,
-    title: 'iphone新款防爆钢化膜',
-    smallImages: '/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform: '天猫',//所属平台
-    couponInfo: '100',//优惠券面额
-    zkFinalPrice: '199.00'//折扣价
-  }, {
-    numIid: 4,
-    title: 'iphone新款防爆钢化膜',
-    smallImages: '/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform: '天猫',//所属平台
-    couponInfo: '100',//优惠券面额
-    zkFinalPrice: '199.00'//折扣价
-  }, {
-    numIid: 5,
-    title: 'iphone新款防爆钢化膜',
-    smallImages: '/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform: '天猫',//所属平台
-    couponInfo: '100',//优惠券面额
-    zkFinalPrice: '199.00'//折扣价
-  }, {
-    numIid: 6,
-    title: 'iphone新款防爆钢化膜',
-    smallImages: '/images/goods.jpeg',
-    volume: 200,//30天销量
-    platform: '天猫',//所属平台
-    couponInfo: '100',//优惠券面额
-    zkFinalPrice: '199.00'//折扣价
-  }
-]
+// const coupons = [
+//   {
+//     numIid:1,
+//     title:'iphone新款防爆钢化膜',
+//     smallImages:'/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform:'天猫',//所属平台
+//     couponInfo:'100',//优惠券面额
+//     zkFinalPrice:'199.00'//折扣价
+//   }, {
+//     numIid: 2,
+//     title: 'iphone新款防爆钢化膜',
+//     smallImages: '/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform: '天猫',//所属平台
+//     couponInfo: '100',//优惠券面额
+//     zkFinalPrice: '199.00'//折扣价
+//   }, {
+//     numIid: 3,
+//     title: 'iphone新款防爆钢化膜',
+//     smallImages: '/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform: '天猫',//所属平台
+//     couponInfo: '100',//优惠券面额
+//     zkFinalPrice: '199.00'//折扣价
+//   }, {
+//     numIid: 4,
+//     title: 'iphone新款防爆钢化膜',
+//     smallImages: '/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform: '天猫',//所属平台
+//     couponInfo: '100',//优惠券面额
+//     zkFinalPrice: '199.00'//折扣价
+//   }, {
+//     numIid: 5,
+//     title: 'iphone新款防爆钢化膜',
+//     smallImages: '/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform: '天猫',//所属平台
+//     couponInfo: '100',//优惠券面额
+//     zkFinalPrice: '199.00'//折扣价
+//   }, {
+//     numIid: 6,
+//     title: 'iphone新款防爆钢化膜',
+//     smallImages: '/images/goods.jpeg',
+//     volume: 200,//30天销量
+//     platform: '天猫',//所属平台
+//     couponInfo: '100',//优惠券面额
+//     zkFinalPrice: '199.00'//折扣价
+//   }
+// ]
 
 const PAGE_LIMIT = 20;
 const getCouponsByPage = function (that, page,cType) {
@@ -149,7 +154,10 @@ const getCouponsByPage = function (that, page,cType) {
       coupons = that.data.coupons.concat(coupons);
     }
     // var coupons = that.data.coupons.concat(resp.data.dataList);
-    that.setData({ coupons: coupons, currentPage: resp.data.currentPage, pageCount: resp.data.pageCount });
+    that.setData({ coupons: coupons, currentPage: resp.data.currentPage,
+     pageCount: resp.data.pageCount });
+    self.setData({ loading: false })
+     
   });
 }
 
@@ -160,6 +168,8 @@ Page({
    */
   data: {
     onAjax:false,
+    loading:false,
+    onQuery:false,
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -188,7 +198,7 @@ Page({
       for(let i=0;i<menus.length;i++){
         menus[i]["imageUrl"] = types[menus[i].cid]["imageUrl"];
       }
-      menus.push({ cid: 13, name: '全部', imageUrl:'/images/types/10-all.png'})
+      menus.push({ cid: null, name: '全部', imageUrl:'/images/types/10-all.png'})
       self.setData({ types: menus})
     })
   },
@@ -239,6 +249,7 @@ Page({
       return false;
     }
     console.log("加载分页")
+    self.setData({ loading:true})
     getCouponsByPage(this, queryPage, self.data.catalog)
   },
 
@@ -255,8 +266,10 @@ Page({
   },
   couponTap:function(e){
     const navigateUrl = e.currentTarget.dataset.url;
+    const id = e.currentTarget.dataset.id;
     wx.navigateTo({
-      url: '/pages/detail/index?url=' + escape(navigateUrl),
+      url: '/pages/detail/index?id=' + id,
+      // url: '/pages/web-view/index?url=' + escape('http://item.jd.com/25738127117.html'),
     })
   },
   menuTabHandle:function(e){
@@ -265,5 +278,29 @@ Page({
     const cid = e.currentTarget.dataset.id;
     self.setData({catalog:cid});
     getCouponsByPage(self,1,cid);
+  },
+  queryFocusHandle:function(e){
+    this.setData({onQuery:true});
+  },
+  queryHandle:function(e){
+    const self = this;
+    const value = e.detail.value;
+    wx.navigateTo({
+      url: '/pages/query/index?title='+value,
+      success:function(){
+
+      },
+      complete:function(){
+        self.setData({ onQuery: false,queryValue:null });
+      }
+    })
+    // utils.requestGet("coupon/wechat/main/coupons", { title:value}, function (resp) {
+    //   that.setData({ onAjax: false, loadmoreDisplay: 'none' })
+    //   wx.hideLoading();
+      
+    // });
+  },
+  cancelQueryHandle:function(e){
+    this.setData({onQuery:false})
   }
 })

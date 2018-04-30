@@ -20,7 +20,10 @@ const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
 }
-const rootDocment = 'http://localhost:8181/coupon-wechat/';//你的域名
+// http://47.98.153.12/coupon-wechat
+// http://47.98.153.12/coupon-wechat
+const rootDocment = 'http://127.0.0.1:8181/coupon-wechat/';//你的域名
+// const rootDocment = 'https://decarvings.com/coupon-wechat/';//你的域名
 
 const request = function (url, data, cb) {
   checkClientToken();

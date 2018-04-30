@@ -1,0 +1,43 @@
+<!--pages/query/index.wxml-->
+<view class="container">
+  <view class="search-container active">
+    <view class="query active}">
+      <icon type="search" size="16" style="margin-top:15rpx;margin-left:15rpx;" color="#76707C"/>
+      <input placeholder="粘贴宝贝标题，先领券，在购物" class="active"   
+            bindfocus="queryFocusHandle"
+            value="{{queryTitle}}"
+            bindconfirm="queryHandle"/>
+    </view>
+    <view  style="margin-left:10rpx"
+       class="cancel" bindtap="cancelQueryHandle">取消</view>
+  </view>
+
+  <view class="goods-container" style="marginTop:60rpx;">
+    <block wx:for="{{coupons}}" wx:key="numIid">
+      <view class="goods-box"
+        data-id="{{item.numIid}}"
+        data-url="{{item.itemUrl}}"
+        bindtap='couponTap' 
+      >
+        <view>
+          <image 
+            src="{{item.pictUrl}}"/>
+          <view class="goods-title">{{item.title}}</view>
+        </view>
+        <view class="goods-info">
+          <view class="goods-price" style="margin-bottom:5rpx;">到手价{{item.zkFinalPrice}}</view>
+          <view style="margin-bottom:10rpx;">
+            <view class="coupon-info">
+              <view class="goods-coupon">领券{{item.couponInfo}}</view>
+              <view class="goods-volume">{{item.platform}}销量{{item.volume}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="my-loading" wx:if="{{loading}}">
+    <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>
+    <text>努力加载中...</text>
+  </view>
+</view>

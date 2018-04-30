@@ -1,10 +1,12 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/detail/index",
+    "pages/web-view/index",
+    "pages/query/index",
     "pages/histroy/index",
     "pages/my/index",
-    "pages/search/index",
-    "pages/detail/index"
+    "pages/search/index"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -31,12 +33,7 @@
         "selectedIconPath": "images/nav/search-on.png",
         "text": "搜索"
       },
-      {
-        "pagePath": "pages/histroy/index",
-        "iconPath": "images/nav/histroy-off.png",
-        "selectedIconPath": "images/nav/histroy-on.png",
-        "text": "最近浏览"
-      },
+   
       {
         "pagePath": "pages/my/index",
         "iconPath": "images/nav/my-off.png",
