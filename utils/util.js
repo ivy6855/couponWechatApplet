@@ -21,9 +21,8 @@ const formatNumber = n => {
   return n[1] ? n : '0' + n
 }
 // http://47.98.153.12/coupon-wechat
-// http://47.98.153.12/coupon-wechat
 const rootDocment = 'http://127.0.0.1:8181/coupon-wechat/';//你的域名
-// const rootDocment = 'https://decarvings.com/coupon-wechat/';//你的域名
+// const rootDocment = 'https://minipro.decarvings.com/coupon-wechat/';//你的域名
 
 const request = function (url, data, cb) {
   checkClientToken();
@@ -96,23 +95,23 @@ const setClientToken = function (callback) {
   }
   return new es6.Promise(function (resolve, reject) {
     console.log("请求token start....")
-    // wx.request({
-    //   url: rootDocment + 'oauth/token',
-    //   data: param,
-    //   method: 'post',
-    //   header: {
-    //     'Content-Type': 'application/x-www-form-urlencoded',
-    //   },
-    //   success: function (resp) {
-    //     console.log("resive token message");
-    //     console.log(resp)
-    //     wx.setStorageSync(TOKEN_KEY, resp.data.value);
-    //     wx.setStorageSync(TOKEN_EXPIRE_KEY, resp.data.expiration);
-    //     resolve();
-    //   },
-    //   fail: function () {
-    //   }
-    // });
+    wx.request({
+      url: rootDocment + 'oauth/token',
+      data: param,
+      method: 'post',
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      success: function (resp) {
+        console.log("resive token message");
+        console.log(resp)
+        wx.setStorageSync(TOKEN_KEY, resp.data.value);
+        wx.setStorageSync(TOKEN_EXPIRE_KEY, resp.data.expiration);
+        resolve();
+      },
+      fail: function () {
+      }
+    });
   })
 }
 
