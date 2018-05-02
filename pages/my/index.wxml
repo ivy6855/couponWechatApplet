@@ -37,8 +37,8 @@
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
       </view>
-    
-      <button open-type="contact">联系客服</button>
+
+      <button open-type="contact" bindtap="customServiceHandle">联系客服</button>
     </view>
   </view>
   </view>

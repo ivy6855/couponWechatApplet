@@ -1,18 +1,19 @@
 {
-  "pages":[
+  "pages": [
+    "pages/search/index",
     "pages/index/index",
     "pages/detail/index",
     "pages/web-view/index",
     "pages/query/index",
     "pages/histroy/index",
     "pages/my/index",
-    "pages/search/index"
+    "pages/component-test/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
   },
   "tabBar": {
     "color": "#646464",
@@ -33,7 +34,6 @@
         "selectedIconPath": "images/nav/search-on.png",
         "text": "搜索"
       },
-   
       {
         "pagePath": "pages/my/index",
         "iconPath": "images/nav/my-off.png",

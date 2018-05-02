@@ -74,5 +74,8 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  customServiceHandle:function(e){
+    console.log(e)
   }
 })
