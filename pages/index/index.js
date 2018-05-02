@@ -156,7 +156,7 @@ const getCouponsByPage = function (that, page,cType) {
     // var coupons = that.data.coupons.concat(resp.data.dataList);
     that.setData({ coupons: coupons, currentPage: resp.data.currentPage,
      pageCount: resp.data.pageCount });
-    self.setData({ loading: false })
+    that.setData({ loading: false })
      
   });
 }

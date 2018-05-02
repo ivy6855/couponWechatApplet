@@ -1,12 +1,12 @@
 {
   "pages": [
-    "pages/search/index",
     "pages/index/index",
+    "pages/my/index",
+    "pages/search/index",
     "pages/detail/index",
     "pages/web-view/index",
     "pages/query/index",
     "pages/histroy/index",
-    "pages/my/index",
     "pages/component-test/index"
   ],
   "window": {

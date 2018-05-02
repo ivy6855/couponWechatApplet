@@ -130,3 +130,39 @@ swiper-item image {
   border-top-left-radius: 40rpx;
   border-bottom-left-radius: 40rpx;
 }
+.toast{
+  height: 100%;
+  width:100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top:0;
+  bottom:0;
+  z-index:999;
+  right: 0;
+  left: 0;
+  font-size: 12px;
+  padding: 30rpx;
+  text-align: center;
+  box-sizing: border-box;
+}
+.toast .taobao{
+  margin-top: 100rpx;
+  width: 690rpx;
+  display: flex;
+}
+.toast .taobao text{
+  width: 100%;
+  background-color: #FFFFFF;
+  border: 1px dashed #EB3F31;
+  border-radius: 10rpx;
+  text-align: center;
+  padding: 20rpx;
+}
+.toast .tip{
+  margin-top: 20rpx;
+  color: #FFF;
+}
+.toast .close{
+  margin-top: 60rpx;
+  text-align: center;
+}

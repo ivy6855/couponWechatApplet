@@ -22,6 +22,8 @@ Page({
   data: {
     indicatorDots: true,
     autoplay: true,
+    showToastFlg:false,
+    taokl:'复制框内整段文字，{model}，打开「手淘」即可「领取优惠券」并购买',
     interval: 3000,
     banners:banners,
     itemcoupon:{}
@@ -97,5 +99,39 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+  handleGetCoupon:function(e){
+    const self = this;
+    //领券
+    //淘宝
+    wx.showToast({
+      title:'加载中...'
+    })
+    const numIid = e.currentTarget.dataset.id;
+    utils.requestGet("coupon/wechat/itemcoupon/" + numIid+"/taobao", {}, function (res) {
+      if (res.state != "success") {
+        wx.showToast({
+          title: '领取失败',
+          icon: 'fail',
+          duration: 2000
+        })
+      }else{
+        wx.showToast({
+          title: '领取成功',
+          icon: 'success',
+          duration: 1000
+        })
+        self.setData({
+          taokl:res.data,
+          showToastFlg:true
+        })
+      }
+    })
+  },
+  handleClose:function(e){
+    this.setData({
+      taokl: '',
+      showToastFlg: false
+    })
   }
 })
