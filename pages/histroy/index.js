@@ -32,9 +32,11 @@ const getByPage = function (that, page) {
     }
     var accessLogs = resp.data.dataList;
     for(let i=0;i<accessLogs.length;i++){
-      accessLogs[i].operTime = dateUtils.getChsDate(accessLogs[i].operTime);
+      accessLogs[i].timer = dateUtils.getChsDate(accessLogs[i].operTime);
       if(i>0){
-        accessLogs[i].preOperTime = dateUtils.getChsDate(accessLogs[i-1].operTime);
+        console.log(accessLogs[i - 1].operTime)
+        console.log(dateUtils.getChsDate(accessLogs[i - 1].operTime))
+        accessLogs[i].preTimer = dateUtils.getChsDate(accessLogs[i-1].operTime);
       }
     }
 

@@ -1,8 +1,8 @@
 <!--pages/histroy/index.wxml-->
 <view class="container">
 <block wx:for="{{accessLogs}}"  wx:key="id" wx:for-index="idx">
-  <view wx:if="{{idx==0}}" class="timer" >{{item.operTime}}</view>
-  <view wx:if="{{item.preOperTime!=item.perTime}}">{{item.operTime}}</view>
+  <view wx:if="{{idx==0}}" class="timer" >{{item.timer}}</view>
+  <view wx:elif="{{item.preTimer!=item.timer}}"  class="timer" >{{item.timer}}</view>
   <view class="access-box" bindtap='couponTap' data-id="{{item.itemCouponVo.numIid}}"data-url="{{item.itemCouponVo.itemUrl}}">
     <view class="image-box">
       <image src="{{item.itemCouponVo.pictUrl}}"></image>

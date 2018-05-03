@@ -49,7 +49,7 @@ function getChsDate(date){
   } else if (todayYear == _date.getFullYear()){
     return (_date.getMonth() + 1) + "月" + _date.getDate() + "日 ";
   }else{
-    return _date.getFullYear() + "年" + (_date.getMonth() + 1) + "月" + _date.getDate() + "日 " + hourMinutes;
+    return _date.getFullYear() + "年" + (_date.getMonth() + 1) + "月" + _date.getDate() + "日 ";
   }
 
 }
