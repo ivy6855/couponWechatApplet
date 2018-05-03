@@ -4,7 +4,7 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
 		"minified": true,
@@ -12,7 +12,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "1.9.98",
-	"appid": "wx5ddecd2b560a3c7d",
+	"appid": "wx06f9eec05ead059a",
 	"projectname": "couponWechatApplet",
 	"isGameTourist": false,
 	"condition": {

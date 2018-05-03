@@ -38,7 +38,11 @@
         </navigator>
       </view>
 
-      <button open-type="contact" bindtap="customServiceHandle">联系客服</button>
+      <button open-type="contact" bindtap="customServiceHandle"
+      send-message-title="jd:10374207100"
+      show-message-card="jd:10374207100"
+      
+      >联系客服</button>
     </view>
   </view>
   </view>
