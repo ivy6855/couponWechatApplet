@@ -43,8 +43,13 @@ function timeCompare(date, prevDate) {
 
 function getChsDate(date){
   let _date = new Date(date);
+  let todayYear = new Date().getFullYear();
   if (isToday(_date)) {
     return "今天";
+  } else if (todayYear == _date.getFullYear()){
+    return (_date.getMonth() + 1) + "月" + _date.getDate() + "日 ";
+  }else{
+    return _date.getFullYear() + "年" + (_date.getMonth() + 1) + "月" + _date.getDate() + "日 " + hourMinutes;
   }
 
 }
