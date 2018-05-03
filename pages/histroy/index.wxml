@@ -1,13 +1,18 @@
 <!--pages/histroy/index.wxml-->
 <view class="container">
-<block wx:for="{{accessLogs}}"  wx:key="id">
-  <view class="access-box">
+<block wx:for="{{accessLogs}}"  wx:key="id" wx:for-index="idx">
+  <view wx:if="{{idx==0}}" class="timer" >{{item.operTime}}</view>
+  <view wx:if="{{item.preOperTime!=item.perTime}}">{{item.operTime}}</view>
+  <view class="access-box" bindtap='couponTap' data-id="{{item.itemCouponVo.numIid}}"data-url="{{item.itemCouponVo.itemUrl}}">
     <view class="image-box">
-      <image src="{{item.coupon.pictUrl}}"></image>
+      <image src="{{item.itemCouponVo.pictUrl}}"></image>
     </view>
     <view class="info-box">
-      <view class="title">{{item.coupon.title}}</view>
-      <view class="coupon"></view>
+      <view class="title">{{item.itemCouponVo.title}}</view>
+      <view class="coupon-info">
+        <view class="coupon-price">¥{{item.itemCouponVo.zkFinalPrice}}</view>
+        <!-- <view class="goods-coupon">{{item.itemCouponVo.couponInfo}}</view> -->
+      </view>
     </view>
   </view>
 </block>

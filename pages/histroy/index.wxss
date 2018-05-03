@@ -1,1 +1,49 @@
 /* pages/histroy/index.wxss */
+
+.container{
+  border-top:1px solid #F0F0F0;
+  padding: 0rpx;
+}
+.access-box{
+  display: flex;
+  height: 180rpx;
+  width: 100%;
+  justify-content: space-between;
+  padding: 10rpx 0;
+  box-sizing: border-box;
+}
+.access-box .image-box{
+  padding-left:30rpx;
+  width:180rpx;
+  height: 180rpx;
+}
+.access-box .image-box image{
+  width:160rpx;
+  height: 160rpx;
+}
+.access-box .info-box{
+  width: 520rpx;
+  padding:0 20rpx 0 0;
+  box-sizing: border-box;
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-bottom: 1px solid #F0F0F0;
+}
+
+.coupon-price{
+  display: inline-block;
+  color: #DE2F21;
+  font-size: 16px;
+  margin-left: 20rpx;
+}
+.timer{
+  width:100%;
+  color:#858585;
+  font-size:12px;
+  text-align:left;
+  border-bottom:1px solid #F0F0F0;
+  padding:10rpx 0 10rpx 20rpx;
+  box-sizing:border-box;
+}

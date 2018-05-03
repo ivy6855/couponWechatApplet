@@ -24,16 +24,28 @@
       <view class="fr coupon-total">{{itemcoupon.volume}}已买</view>
     </view>
   </view>
-
   <view class="coupon-con">
-    <view class="coupon-paper" bindtap="handleGetCoupon" data-id="{{itemcoupon.numIid}}"  data-platform="{{platform}}">
-      <view class="dotted l"></view>
-      <view class="dotted r"></view>
-      <view class="paper">
-        <text>{{itemcoupon.couponInfo}}元优惠券</text>
-      </view>
-      <view class="get">立即领券</view>
-    </view>
+      <button wx:if="{{itemcoupon.platform=='jingtuitui'}}" class="coupon-paper"  open-type='contact'
+        data-id="{{itemcoupon.numIid}}"  data-platform="{{itemcoupon.platform}}"
+         bindcontact="customServiceHandle" bindtap="handelBeforeService">
+          <view class="dotted l"></view>
+          <view class="dotted r"></view>
+          <view class="paper">
+            <text>{{itemcoupon.couponInfo}}元优惠券</text>
+          </view>
+          <view class="get">立即领券</view>
+      </button>
+      <block wx:else>
+        <view class="coupon-paper" bindtap="handleGetCoupon"
+         data-id="{{itemcoupon.numIid}}"  data-platform="{{itemcoupon.platform}}">
+          <view class="dotted l"></view>
+          <view class="dotted r"></view>
+          <view class="paper">
+            <text>{{itemcoupon.couponInfo}}元优惠券</text>
+          </view>
+          <view class="get">立即领券</view>
+        </view>
+      </block>
   </view>
 
 

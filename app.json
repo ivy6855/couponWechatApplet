@@ -5,8 +5,8 @@
     "pages/search/index",
     "pages/detail/index",
     "pages/web-view/index",
-    "pages/query/index",
     "pages/histroy/index",
+    "pages/query/index",
     "pages/component-test/index"
   ],
   "window": {
@@ -33,6 +33,12 @@
         "iconPath": "images/nav/search-off.png",
         "selectedIconPath": "images/nav/search-on.png",
         "text": "搜索"
+      },
+      {
+        "pagePath": "pages/histroy/index",
+        "iconPath": "images/nav/histroy-off.png",
+        "selectedIconPath": "images/nav/histroy-on.png",
+        "text": "最近浏览"
       },
       {
         "pagePath": "pages/my/index",

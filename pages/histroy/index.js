@@ -1,6 +1,55 @@
 // pages/histroy/index.js
 const utils = require("../../utils/util.js");
+const dateUtils = require("../../utils/date-util.js");
 const app = getApp();
+
+
+const PAGE_LIMIT = 10;
+const getByPage = function (that, page) {
+  let q_page = page || 1;
+  if (that.data.onAjax) {
+    return false;
+  }
+  if (that.data.pageCount && that.data.pageCount < q_page) {
+    that.setData({ nomoreDisplay: 'block' });
+    return false;
+  }
+  var params = {
+    start: (q_page - 1) * PAGE_LIMIT,
+    limit: PAGE_LIMIT
+  }
+  
+  params["customerId"] = app.globalData.USER_ID;
+  wx.showLoading({
+    mask: true
+  });
+  that.setData({ onAjax: true, loadmoreDisplay: 'block' })
+  utils.requestGet("coupon/wechat/accesslog", params, function (resp) {
+    that.setData({ onAjax: false, loadmoreDisplay: 'none' })
+    wx.hideLoading();
+    if (resp.state != 'success') {
+      return false;
+    }
+    var accessLogs = resp.data.dataList;
+    for(let i=0;i<accessLogs.length;i++){
+      accessLogs[i].operTime = dateUtils.getChsDate(accessLogs[i].operTime);
+      if(i>0){
+        accessLogs[i].preOperTime = dateUtils.getChsDate(accessLogs[i-1].operTime);
+      }
+    }
+
+    if (page > 1) {
+      accessLogs = that.data.accessLogs.concat(accessLogs);
+    }
+    // var coupons = that.data.coupons.concat(resp.data.dataList);
+    that.setData({
+      accessLogs: accessLogs,
+      currentPage: resp.data.currentPage,
+      pageCount: resp.data.pageCount
+    });
+    that.setData({ loading: false })
+  });
+}
 
 Page({
 
@@ -8,7 +57,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    accessLogs:[]
+    accessLogs:[],
+    renderDate:function(){
+      console.log(123)
+      return "1212";
+    }
   },
 
   /**
@@ -16,20 +69,7 @@ Page({
    */
   onLoad: function (options) {
     const self = this;
-    utils.requestGet("coupon/wechat/accesslog", {}, function (resp) {
-      console.log(resp);
-      self.setData({ accessLogs:resp.data.dataList});
-      const accessLogs = resp.data.dataList;
-      for (let i = 0; i < accessLogs.length;i++){
-        utils.requestGet("coupon/wechat/itemcoupon/" + accessLogs[i].numIid,{},function(resp2){
-          if (resp.state != 'success') {
-            return false;
-          }
-          accessLogs[i].coupon = resp2.data;
-        })
-      }
-    });
-
+    getByPage(self,1)
   },
 
   /**
@@ -79,5 +119,13 @@ Page({
    */
   onShareAppMessage: function () {
   
-  }
+  },
+  couponTap: function (e) {
+    const navigateUrl = e.currentTarget.dataset.url;
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/detail/index?id=' + id,
+      // url: '/pages/web-view/index?url=' + escape('http://item.jd.com/25738127117.html'),
+    })
+  },
 })
