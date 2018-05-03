@@ -49,7 +49,12 @@
           <view class="goods-title">{{item.title}}</view>
         </view>
         <view class="goods-info">
-          <view class="goods-price" style="margin-bottom:5rpx;">到手价{{item.zkFinalPrice}}</view>
+          <view class="price-info">
+            <view class="goods-price" style="margin-bottom:5rpx;">
+              到手价{{item.zkFinalPrice}}
+            </view>
+            <view class="original">原价{{item.originalPrice}}</view>
+          </view>
           <view style="margin-bottom:10rpx;">
             <view class="coupon-info">
               <view class="goods-coupon">领券{{item.couponInfo}}</view>

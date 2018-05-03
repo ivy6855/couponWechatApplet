@@ -45,6 +45,17 @@
   display: flex;
   flex-direction:column;
 }
+.goods-box .goods-info .price-info{
+  display: flex;
+  justify-content: space-between;
+  line-height: 48rpx;
+}
+.goods-box .goods-info  .original{
+  line-height: auto;
+  color: #8F8F8F;
+  text-decoration:line-through;
+}
+
 .goods-box .coupon-info{
   display: flex;
   justify-content:space-between;

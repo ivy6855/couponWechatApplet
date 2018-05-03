@@ -156,6 +156,7 @@ const getCouponsByPage = function (that, page,cType) {
       } else if (coupons[i].platform == "jingtuitui") {
         coupons[i].platform = "京东"
       }
+      coupons[i].originalPrice = parseFloat(coupons[i].couponInfo) + parseFloat(coupons[i].zkFinalPrice);
 
     }
     if (page>1){
