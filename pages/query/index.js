@@ -106,7 +106,7 @@ Page({
   onReachBottom: function () {
     const self = this;
     var queryPage = this.data.currentPage + 1;
-    if (queryPage > this.data.totalPage) {
+    if (queryPage > this.data.pageCount) {
       //已经是最后一页了
       return false;
     }
@@ -124,7 +124,8 @@ Page({
     wx.navigateBack({
       delta: 1
     })
-  }, queryHandle: function (e) {
+  },
+  queryHandle: function (e) {
     const self = this;
     const value = e.detail.value;
     self.setData({queryTitle:value});

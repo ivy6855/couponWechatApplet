@@ -16,4 +16,8 @@
     </view>
   </view>
 </block>
+  <view class="my-loading" wx:if="{{loading}}">
+    <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>
+    <text>努力加载中...</text>
+  </view>
 </view>

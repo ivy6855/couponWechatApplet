@@ -25,23 +25,21 @@ const getByPage = function (that, page) {
   });
   that.setData({ onAjax: true, loadmoreDisplay: 'block' })
   utils.requestGet("coupon/wechat/accesslog", params, function (resp) {
+    that.setData({ loading: false });
     that.setData({ onAjax: false, loadmoreDisplay: 'none' })
     wx.hideLoading();
     if (resp.state != 'success') {
       return false;
     }
     var accessLogs = resp.data.dataList;
-    for(let i=0;i<accessLogs.length;i++){
-      accessLogs[i].timer = dateUtils.getChsDate(accessLogs[i].operTime);
-      if(i>0){
-        console.log(accessLogs[i - 1].operTime)
-        console.log(dateUtils.getChsDate(accessLogs[i - 1].operTime))
-        accessLogs[i].preTimer = dateUtils.getChsDate(accessLogs[i-1].operTime);
-      }
-    }
-
     if (page > 1) {
       accessLogs = that.data.accessLogs.concat(accessLogs);
+    }
+    for (let i = 0; i < accessLogs.length; i++) {
+      accessLogs[i].timer = dateUtils.getChsDate(accessLogs[i].operTime);
+      if (i > 0) {
+        accessLogs[i].preTimer = dateUtils.getChsDate(accessLogs[i - 1].operTime);
+      }
     }
     // var coupons = that.data.coupons.concat(resp.data.dataList);
     that.setData({
@@ -60,10 +58,7 @@ Page({
    */
   data: {
     accessLogs:[],
-    renderDate:function(){
-      console.log(123)
-      return "1212";
-    }
+    loading:false
   },
 
   /**
@@ -113,7 +108,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-  
+    const self = this;
+    var queryPage = this.data.currentPage + 1;
+    if (queryPage > this.data.pageCount) {
+      //已经是最后一页了
+      return false;
+    }
+    self.setData({ loading: true })
+    getByPage(this, queryPage)
   },
 
   /**

@@ -37,12 +37,6 @@
           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </navigator>
       </view>
-
-      <button open-type="contact" bindtap="customServiceHandle"
-      send-message-title="jd:10374207100"
-      show-message-card="jd:10374207100"
-      
-      >联系客服</button>
     </view>
   </view>
   </view>

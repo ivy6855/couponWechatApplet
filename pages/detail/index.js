@@ -25,7 +25,7 @@ Page({
     showToastFlg:false,
     taokl:'复制框内整段文字，{model}，打开「手淘」即可「领取优惠券」并购买',
     interval: 3000,
-    banners:banners,
+    banners:[],
     itemcoupon:{}
   },
 

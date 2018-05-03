@@ -1,1 +1,6 @@
-{}
+{
+  "disableScroll": true,
+  "navigationBarTitleText": "详情",
+  "navigationBarBackgroundColor": "#EB3F31",
+  "navigationBarTextStyle": "#FFF"
+}

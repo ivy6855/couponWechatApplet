@@ -150,6 +150,14 @@ const getCouponsByPage = function (that, page,cType) {
       return false;
     }
     var coupons = resp.data.dataList;
+    for (let i = 0; i < coupons.length;i++){
+      if (coupons[i].platform=="taoke"){
+        coupons[i].platform="淘宝"
+      } else if (coupons[i].platform == "jingtuitui") {
+        coupons[i].platform = "京东"
+      }
+
+    }
     if (page>1){
       coupons = that.data.coupons.concat(coupons);
     }
@@ -244,7 +252,7 @@ Page({
   onReachBottom: function () {
     const self = this;
     var queryPage = this.data.currentPage + 1;
-    if (queryPage > this.data.totalPage) {
+    if (queryPage > this.data.pageCount) {
       //已经是最后一页了
       return false;
     }

@@ -12,6 +12,7 @@
 .swiper_box {
   width: 750rpx;
   height:750rpx;
+  box-sizing: border-box;
 }
 
 swiper-item image {
@@ -72,7 +73,7 @@ swiper-item image {
 
 .coupon-con{
   width: 750rpx;
-  padding: 0 40rpx;
+  /* padding: 0 40rpx; */
   text-align: center;
   background-color: #FFFFFF;
   margin-top: 20rpx;
@@ -91,7 +92,7 @@ swiper-item image {
 
 .coupon-paper .paper{
   display: inline-block;
-  width:440rpx;
+  width:340rpx;
   height: 200rpx;
   line-height: 200rpx;
   text-align: center;
