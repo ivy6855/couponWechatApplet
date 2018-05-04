@@ -1,11 +1,15 @@
 <!--pages/search/index.wxml-->
-<view class="container">
+<scroll-view class="container" 
+  bindscroll="handleScroll" scroll-y="true" 
+  lower-threshold="100" 
+  scroll-top="{{scrollTop}}"
+>
   <view class="search-container">
     <view style="font-size:36px;color:#FFFFFF;">天天折扣券</view>
     <view style="font-size:14px;font-weight:400;margin-top:30rpx;color:#FFFFFF;">最全的折扣券平台</view>
     <view class="search-box" style="margin-top:60rpx;">
-      <icon type="search" size="16" style="" color="#76707C"/>
-      <input placeholder="粘贴宝贝标题，先领券，在购物" bindconfirm="handleSearch" bindinput='handleInpu'/>
+      <icon type="search" size="16" style="height:16px;" color="#76707C"/>
+      <input placeholder="粘贴宝贝标题，先领券，在购物" bindconfirm="handleSearch" bindinput='handleInput'/>
     </view>
     <image class="wave" src="/images/more/wave.png" mode="aspectFill"></image>
     <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
@@ -42,4 +46,7 @@
   </view>
 
 
+</scroll-view>
+<view class="to-top" bindtap='handleToTop' style="display:{{showTop?'block':'none'}}">
+  <image mode="aspectFit" src="/images/top.png"></image>
 </view>

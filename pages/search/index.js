@@ -10,7 +10,11 @@ const queryPageByPlatform = function(that,page,flatform){
   if(queryValue==null||queryValue==""||queryValue==undefined){
     return false;
   }
+  wx.showLoading({
+    title: '查询中...',
+  })
   utils.request("coupon/wechat/itemcoupon/listconnect?type="+flatform+"&name=" + queryValue, {}, function (resp) {
+    wx.hideLoading();
     const coupons = that.data.coupons.concat(resp.data.dataList || []);
     couponHelp.deal(coupons);
     that.setData({ coupons: coupons })
@@ -24,7 +28,9 @@ Page({
    */
   data: {
     queryValue:"",
-    coupons:[]
+    coupons:[],
+    scrollTop: 0,
+    showTop: false
   },
 
   /**
@@ -82,13 +88,20 @@ Page({
   onShareAppMessage: function () {
   
   },
-  handleInpu:function(e){
+  handleInput:function(e){
     this.setData({queryValue:e.detail.value});
+  },
+  handleScroll: function (event) {
+    const scrollTop = event.detail.scrollTop;
+    this.setData({ showTop: (scrollTop > 300) ? true : false })
   },
   handleSearch:function(event){
     const self = this;
     queryPageByPlatform(self, 1,"jingtuitui")
     queryPageByPlatform(self, 1,"taoke")
     
+  },
+  handleToTop: function () {
+    this.setData({ scrollTop: 0, showTop: false })
   }
 })
