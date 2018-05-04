@@ -1,5 +1,4 @@
 <!--pages/query/index.wxml-->
-<view class="container">
   <view class="search-container active">
     <view class="query active}">
       <icon type="search" size="16" style="margin-top:15rpx;margin-left:15rpx;" color="#76707C"/>
@@ -8,9 +7,13 @@
             value="{{queryTitle}}"
             bindconfirm="queryHandle"/>
     </view>
-    <view  style="margin-left:10rpx"
-       class="cancel" bindtap="cancelQueryHandle">取消</view>
+    <view  style="margin-left:10rpx" class="cancel" bindtap="cancelQueryHandle">取消</view>
   </view>
+<scroll-view class="container" bindscroll="handleScroll" scroll-y="true" 
+  lower-threshold="100" 
+  scroll-top="{{scrollTop}}"
+  bindscrolltolower="scrolltolower">
+
 
   <view class="goods-container" style="marginTop:60rpx;">
     <block wx:for="{{coupons}}" wx:key="numIid">
@@ -45,4 +48,7 @@
     <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>
     <text>努力加载中...</text>
   </view>
+</scroll-view>
+<view class="to-top" bindtap='handleToTop' style="display:{{showTop?'block':'none'}}">
+  <image mode="aspectFit" src="/images/top.png"></image>
 </view>

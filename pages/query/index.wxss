@@ -1,10 +1,12 @@
 /* pages/query/index.wxss */
 page{
   background-color: #EEEEEE;
+  height: 100%;
 }
 .container{
   background-color: #FFFFFF;
   padding-top:80rpx;
+  height: 100%;
 }
 .search-container{
   position: absolute;

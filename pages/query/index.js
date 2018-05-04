@@ -61,7 +61,9 @@ Page({
     onAjax: false,
     onQuery: false,
     loading:false,
-    coupons: []
+    coupons: [],
+    scrollTop: 0,
+    showTop: false
   },
 
   /**
@@ -112,14 +114,14 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    const self = this;
-    var queryPage = this.data.currentPage + 1;
-    if (queryPage > this.data.pageCount) {
-      //已经是最后一页了
-      return false;
-    }
-    self.setData({loading:true});
-    getCouponsByPage(this, queryPage, self.data.queryTitle);
+    // const self = this;
+    // var queryPage = this.data.currentPage + 1;
+    // if (queryPage > this.data.pageCount) {
+    //   //已经是最后一页了
+    //   return false;
+    // }
+    // self.setData({loading:true});
+    // getCouponsByPage(this, queryPage, self.data.queryTitle);
   },
 
   /**
@@ -145,7 +147,24 @@ Page({
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
       url: '/pages/detail/index?id=' + id,
-      // url: '/pages/web-view/index?url=' + escape('http://item.jd.com/25738127117.html'),
     })
   },
+  handleScroll: function (event) {
+    console.log(event)
+    const scrollTop = event.detail.scrollTop;
+    this.setData({ showTop: (scrollTop > 600) ? true : false })
+  },
+  scrolltolower: function () {
+    const self = this;
+    var queryPage = this.data.currentPage + 1;
+    if (queryPage > this.data.pageCount) {
+      //已经是最后一页了
+      return false;
+    }
+    self.setData({ loading: true });
+    getCouponsByPage(this, queryPage, self.data.queryTitle);
+  },
+  handleToTop: function () {
+    this.setData({ scrollTop: 0, showTop: false })
+  }
 })
