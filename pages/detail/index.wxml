@@ -20,6 +20,7 @@
       <view>
         <view class="coupon-tag">券后价</view>
         <view class="coupon-price">¥{{itemcoupon.zkFinalPrice}}</view>
+        <view class="original-price">原价¥{{itemcoupon.originalPrice}}</view>
       </view>
       <view class="fr coupon-total">{{itemcoupon.volume}}已买</view>
     </view>

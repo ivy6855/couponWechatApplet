@@ -1,4 +1,7 @@
-<view class="container">
+<scroll-view class="container" bindscroll="handleScroll" scroll-y="true" 
+  lower-threshold="100" 
+  scroll-top="{{scrollTop}}"
+  bindscrolltolower="scrolltolower">
   <view class="swiper-container">
     <swiper class="swiper_box" 
                 autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
@@ -69,4 +72,7 @@
     <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>
     <text>努力加载中...</text>
   </view>
+</scroll-view>
+<view class="to-top" bindtap='handleToTop' style="display:{{showTop?'block':'none'}}">
+  <image mode="aspectFit" src="/images/top.png"></image>
 </view>

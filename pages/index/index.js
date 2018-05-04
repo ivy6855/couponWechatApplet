@@ -156,8 +156,7 @@ const getCouponsByPage = function (that, page,cType) {
       } else if (coupons[i].platform == "jingtuitui") {
         coupons[i].platform = "京东"
       }
-      coupons[i].originalPrice = parseFloat(coupons[i].couponInfo) + parseFloat(coupons[i].zkFinalPrice);
-
+      coupons[i].originalPrice = (parseFloat(coupons[i].couponInfo) + parseFloat(coupons[i].zkFinalPrice)).toFixed(2);
     }
     if (page>1){
       coupons = that.data.coupons.concat(coupons);
@@ -186,7 +185,9 @@ Page({
     swiperCurrent:0,
     banners:banners,
     types:types,
-    coupons: []
+    coupons: [],
+    scrollTop:0,
+    showTop:false
   },
 
   /**
@@ -251,15 +252,15 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    const self = this;
-    var queryPage = this.data.currentPage + 1;
-    if (queryPage > this.data.pageCount) {
-      //已经是最后一页了
-      return false;
-    }
-    console.log("加载分页")
-    self.setData({ loading:true})
-    getCouponsByPage(this, queryPage, self.data.catalog)
+    // const self = this;
+    // var queryPage = this.data.currentPage + 1;
+    // if (queryPage > this.data.pageCount) {
+    //   //已经是最后一页了
+    //   return false;
+    // }
+    // console.log("加载分页")
+    // self.setData({ loading:true})
+    // getCouponsByPage(this, queryPage, self.data.catalog)
   },
 
   /**
@@ -303,13 +304,29 @@ Page({
         self.setData({ onQuery: false,queryValue:null });
       }
     })
-    // utils.requestGet("coupon/wechat/main/coupons", { title:value}, function (resp) {
-    //   that.setData({ onAjax: false, loadmoreDisplay: 'none' })
-    //   wx.hideLoading();
-      
-    // });
   },
   cancelQueryHandle:function(e){
     this.setData({onQuery:false})
+  },
+  handleScroll:function(event){
+    const scrollTop = event.detail.scrollTop;
+    this.setData({ showTop: (scrollTop > 300) ? true : false })
+  },
+  scrolltolower:function(){
+    const self = this;
+    var queryPage = this.data.currentPage + 1;
+    if (queryPage > this.data.pageCount) {
+      //已经是最后一页了
+      return false;
+    }
+    console.log("加载分页")
+    self.setData({ loading: true })
+    if(this.data.loading){
+      return false;
+    }
+    getCouponsByPage(this, queryPage, self.data.catalog)
+  },
+  handleToTop:function(){
+    this.setData({ scrollTop: 0, showTop:false})
   }
 })

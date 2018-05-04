@@ -48,6 +48,13 @@ Page({
         })
       }
       const itemcoupon = res.data||{};
+      if (itemcoupon.platform == "taoke") {
+        itemcoupon.platform = "淘宝"
+      } else if (itemcoupon.platform == "jingtuitui") {
+        itemcoupon.platform = "京东"
+      }
+      itemcoupon.originalPrice = (parseFloat(itemcoupon.couponInfo) + parseFloat(itemcoupon.zkFinalPrice)).toFixed(2);
+
       self.setData({ itemcoupon: itemcoupon});
       let pics = [];
       pics.push({ pictUrl: itemcoupon.pictUrl, id: itemcoupon.numIid});

@@ -1,8 +1,11 @@
 /* pages/index2/index.wxss */
-
+page{
+  height: 100%;
+}
 .container {
   background-color: #F2f2f2;
   min-height: 100%;
+  height: 100%;
 }
 .swiper-container{
   width: 750rpx;

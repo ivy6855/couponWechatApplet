@@ -33,6 +33,14 @@ const getCouponsByPage = function (that, page, queryTitle) {
       return false;
     }
     var coupons = resp.data.dataList;
+    for (let i = 0; i < coupons.length; i++) {
+      if (coupons[i].platform == "taoke") {
+        coupons[i].platform = "淘宝"
+      } else if (coupons[i].platform == "jingtuitui") {
+        coupons[i].platform = "京东"
+      }
+      coupons[i].originalPrice = (parseFloat(coupons[i].couponInfo) + parseFloat(coupons[i].zkFinalPrice)).toFixed(2) ;
+    }
     if (page > 1) {
       coupons = that.data.coupons.concat(coupons);
     }

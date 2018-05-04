@@ -167,3 +167,8 @@ swiper-item image {
   margin-top: 60rpx;
   text-align: center;
 }
+
+.original-price{
+  display: inline;
+  margin-left: 20rpx;
+}
