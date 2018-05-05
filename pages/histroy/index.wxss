@@ -3,14 +3,32 @@
 .container{
   /* border-top:1px solid #F0F0F0; */
   padding: 0rpx;
+  justify-content: initial;
+}
+.box{
+  display: flex;
+  justify-content:space-between;
+  width: 870rpx;
+  overflow: hidden;
+  box-sizing: border-box;
+  transition: margin-left 0.2s ease-in-out;
+}
+.box .delete-btn{
+  width: 120rpx;
+  line-height: 180rpx;
+  text-align: center;
+  background:#e64340;
+  font-size: 24rpx;
+  color: #fff;
 }
 .access-box{
   display: flex;
   height: 180rpx;
-  width: 100%;
+  width: 750rpx;
   justify-content: space-between;
   padding: 10rpx 0;
   box-sizing: border-box;
+  border-bottom: 1px solid #F0F0F0;
 }
 .access-box .image-box{
   padding-left:30rpx;
@@ -29,7 +47,6 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border-bottom: 1px solid #F0F0F0;
 }
 
 .coupon-price{

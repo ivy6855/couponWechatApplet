@@ -44,9 +44,6 @@ function timeCompare(date, prevDate) {
 function getChsDate(date){
   //safari兼容写法
   let _date = new Date(date.substr(0, 10) + "T" + date.substr(11, 8));
-  console.log(date)
-  console.log("*****")
-  console.log(_date)
   if (isToday(_date)) {
     return "今天";
   } else if (nowYear == _date.getFullYear()){

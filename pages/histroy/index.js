@@ -36,6 +36,7 @@ const getByPage = function (that, page) {
       accessLogs = that.data.accessLogs.concat(accessLogs);
     }
     for (let i = 0; i < accessLogs.length; i++) {
+      // accessLogs[i].left=0;
       accessLogs[i].timer = dateUtils.getChsDate(accessLogs[i].operTime);
       if (i > 0) {
         accessLogs[i].preTimer = dateUtils.getChsDate(accessLogs[i - 1].operTime);
@@ -58,7 +59,9 @@ Page({
    */
   data: {
     accessLogs:[],
-    loading:false
+    loading:false,
+    onDelFlag:false,
+    delBtnWidth: 120,    //删除按钮宽度单位（rpx）
   },
 
   /**
@@ -127,6 +130,9 @@ Page({
   
   },
   couponTap: function (e) {
+    if (this.data.onDelFlag){
+      return false;
+    }
     const navigateUrl = e.currentTarget.dataset.url;
     const id = e.currentTarget.dataset.id;
     wx.navigateTo({
@@ -134,4 +140,72 @@ Page({
       // url: '/pages/web-view/index?url=' + escape('http://item.jd.com/25738127117.html'),
     })
   },
+  touchS: function (e) {
+    if (e.touches.length == 1) {
+      this.setData({
+        startX: e.touches[0].clientX
+      });
+    }
+  },
+  touchM: function (e) {
+    var index = e.currentTarget.dataset.index;
+    if (e.touches.length == 1) {
+      var moveX = e.touches[0].clientX;
+      var disX = this.data.startX - moveX;
+      var delBtnWidth = this.data.delBtnWidth;
+      var left = "";
+      if (disX == 0 || disX < 0) {//如果移动距离小于等于0，container位置不变
+        left = "margin-left:0px";
+      } else if (disX > 0) {//移动距离大于0，container left值等于手指移动距离
+        left = "margin-left:-" + disX + "rpx";
+        if (disX >= delBtnWidth) {
+          left = "left:-" + delBtnWidth + "rpx";
+        }
+      }
+      var list = this.data.accessLogs;
+      if (index != "" && index != null) {
+        list[parseInt(index)].left = left;
+        this.setData({ accessLogs:list});
+      }
+    }
+  },
+  touchE: function (e) {
+    var index = e.currentTarget.dataset.index;
+    if (e.changedTouches.length == 1) {
+      var endX = e.changedTouches[0].clientX;
+      var disX = this.data.startX - endX;
+      var delBtnWidth = this.data.delBtnWidth;
+      //如果距离小于删除按钮的1/2，不显示删除按钮
+      var left = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "rpx" : "margin-left:0px";
+      var list = this.data.accessLogs;
+      if (index != "" && index != null) {
+        list[parseInt(index)].left = left;
+        this.setData({ accessLogs: list });
+      }
+      if (disX > delBtnWidth / 2 ){
+        this.setData({onDelFlag:true})
+      }
+    }
+  },
+  delItem:function(event){
+    const self = this;
+    const index = event.currentTarget.dataset.index;
+    const id = event.currentTarget.dataset.id;
+    let list = this.data.accessLogs;
+    wx.showLoading({
+      title: '删除中...',
+    })
+    utils.requestGet("coupon/wechat/accesslog/del/"+id, {}, function (resp) {
+      wx.hideLoading();
+      if(resp.state=="success"){
+        wx.showToast({
+          title: '成功',
+          icon: 'success',
+          duration: 1000
+        })
+        list.splice(index, 1);
+        self.setData({ accessLogs: list });
+      }
+    });
+  }
 })

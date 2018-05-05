@@ -14,6 +14,22 @@ const banners = [{
 }];
 
 
+const dealDetail = function(self,data){
+  const itemcoupon = data || {};
+  if (itemcoupon.platform == "taoke") {
+    itemcoupon.platformText = "淘宝"
+  } else if (itemcoupon.platform == "jingtuitui") {
+    itemcoupon.platformText = "京东"
+  }
+  itemcoupon.originalPrice = (parseFloat(itemcoupon.couponInfo) + parseFloat(itemcoupon.zkFinalPrice)).toFixed(2);
+
+  self.setData({ itemcoupon: itemcoupon });
+  let pics = [];
+  pics.push({ pictUrl: itemcoupon.pictUrl, id: itemcoupon.numIid });
+  self.setData({ banners: pics });
+}
+
+
 Page({
 
   /**
@@ -35,31 +51,39 @@ Page({
   onLoad: function (options) {
     const self = this;
     const numIid = options.id;
+    const type = options.type;
     wx.showLoading({
       title: '加载中...',
-    })
-    utils.requestGet("coupon/wechat/itemcoupon/" + numIid + "/" + app.globalData.USER_ID, {}, function (res) {
-      wx.hideLoading()
-      if(res.state !="success"){
-        wx.showToast({
-          title: '加载失败',
-          icon: 'fail',
-          duration: 2000
-        })
-      }
-      const itemcoupon = res.data||{};
-      if (itemcoupon.platform == "taoke") {
-        itemcoupon.platform = "淘宝"
-      } else if (itemcoupon.platform == "jingtuitui") {
-        itemcoupon.platform = "京东"
-      }
-      itemcoupon.originalPrice = (parseFloat(itemcoupon.couponInfo) + parseFloat(itemcoupon.zkFinalPrice)).toFixed(2);
+    });
+    if(type=="outer"){
+      //访问外部详情，numIid为outterid
+      utils.requestGet("coupon/wechat/itemcoupon/connect/" + numIid + "/" + app.globalData.USER_ID, {}, function (res) {
+        wx.hideLoading()
+        if (res.state != "success") {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+        dealDetail(self, res.data || [])
+      })
+      
 
-      self.setData({ itemcoupon: itemcoupon});
-      let pics = [];
-      pics.push({ pictUrl: itemcoupon.pictUrl, id: itemcoupon.numIid});
-      self.setData({ banners: pics});
-    })
+    }else{
+      utils.requestGet("coupon/wechat/itemcoupon/" + numIid + "/" + app.globalData.USER_ID, {}, function (res) {
+        wx.hideLoading()
+        if (res.state != "success") {
+          wx.showToast({
+            title: '加载失败',
+            icon: 'fail',
+            duration: 2000
+          })
+        }
+        dealDetail(self,res.data||[])
+      })
+    }
+    
   },
 
   /**

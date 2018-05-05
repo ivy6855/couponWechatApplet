@@ -3,18 +3,29 @@
 <block wx:for="{{accessLogs}}"  wx:key="id" wx:for-index="idx">
   <view wx:if="{{idx==0}}" class="timer" >{{item.timer}}</view>
   <view wx:elif="{{item.preTimer!=item.timer}}"  class="timer" >{{item.timer}}</view>
-  <view class="access-box" bindtap='couponTap' data-id="{{item.itemCouponVo.numIid}}"data-url="{{item.itemCouponVo.itemUrl}}">
-    <view class="image-box">
-      <image src="{{item.itemCouponVo.pictUrl}}"></image>
-    </view>
-    <view class="info-box">
-      <view class="title">{{item.itemCouponVo.title}}</view>
-      <view class="coupon-info">
-        <view class="coupon-price">¥{{item.itemCouponVo.zkFinalPrice}}</view>
-        <!-- <view class="goods-coupon">{{item.itemCouponVo.couponInfo}}</view> -->
+  <view class="a-box" style="width: 100%; overflow: hidden;">
+    <view class="box"  wx:if="{{item.itemCouponVo}}" style="{{item.left}}">
+      <view class="access-box"  data-index="{{idx}}"
+        bindtouchstart="touchS" bindtouchmove="touchM" bindtouchend="touchE" 
+        catchtap='couponTap' data-id="{{item.itemCouponVo.numIid}}"data-url="{{item.itemCouponVo.itemUrl}}">
+        <view class="image-box">
+          <image src="{{item.itemCouponVo.pictUrl}}"></image>
+        </view>
+        <view class="info-box">
+          <view class="title">{{item.itemCouponVo.title}}</view>
+          <view class="coupon-info">
+            <view class="coupon-price">¥{{item.itemCouponVo.zkFinalPrice}}</view>
+            <!-- <view class="goods-coupon">{{item.itemCouponVo.couponInfo}}</view> -->
+          </view>
+        </view>
+      </view>
+      <view class="delete-btn" data-index="{{idx}}" data-id="{{item.id}}" catchtap="delItem">
+        删除
       </view>
     </view>
   </view>
+  
+  
 </block>
   <view class="my-loading" wx:if="{{loading}}">
     <image src="/images/loading.gif" style="width:60px;height:60px;"> </image>

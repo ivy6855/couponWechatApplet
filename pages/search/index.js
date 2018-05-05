@@ -15,9 +15,14 @@ const queryPageByPlatform = function(that,page,flatform){
   })
   utils.request("coupon/wechat/itemcoupon/listconnect?type="+flatform+"&name=" + queryValue, {}, function (resp) {
     wx.hideLoading();
-    const coupons = that.data.coupons.concat(resp.data.dataList || []);
-    couponHelp.deal(coupons);
-    that.setData({ coupons: coupons })
+    if(resp&&resp.data){
+      const coupons = that.data.coupons.concat(resp.data.dataList || []);
+      for(let i=0;i<coupons.length;i++){
+        coupons[i].platform = flatform;
+      }
+      couponHelp.deal(coupons);
+      that.setData({ coupons: coupons })
+    }
   });
 }
 
@@ -103,5 +108,12 @@ Page({
   },
   handleToTop: function () {
     this.setData({ scrollTop: 0, showTop: false })
-  }
+  },
+  couponTap: function (e) {
+    const navigateUrl = e.currentTarget.dataset.url;
+    const id = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: '/pages/detail/index?id=' + id+"&type=outer",
+    })
+  },
 })

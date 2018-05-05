@@ -61,7 +61,7 @@
           <view style="margin-bottom:10rpx;">
             <view class="coupon-info">
               <view class="goods-coupon">领券{{item.couponInfo}}</view>
-              <view class="goods-volume">{{item.platform}}销量{{item.volume}}</view>
+              <view class="goods-volume">{{item.platformText}}销量{{item.volume}}</view>
             </view>
           </view>
         </view>

@@ -1,6 +1,9 @@
 // pages/index2/index.js
 const utils = require("../../utils/util.js");
 const app = getApp();
+const couponHelp = require("../../utils/coupon-help.js");
+
+
 // {
 //   "pagePath": "pages/histroy/index",
 //     "iconPath": "images/nav/histroy-off.png",
@@ -150,14 +153,7 @@ const getCouponsByPage = function (that, page,cType) {
       return false;
     }
     var coupons = resp.data.dataList;
-    for (let i = 0; i < coupons.length;i++){
-      if (coupons[i].platform=="taoke"){
-        coupons[i].platform="淘宝"
-      } else if (coupons[i].platform == "jingtuitui") {
-        coupons[i].platform = "京东"
-      }
-      coupons[i].originalPrice = (parseFloat(coupons[i].couponInfo) + parseFloat(coupons[i].zkFinalPrice)).toFixed(2);
-    }
+    couponHelp.deal(coupons);
     if (page>1){
       coupons = that.data.coupons.concat(coupons);
     }

@@ -9,15 +9,15 @@
     <view style="font-size:14px;font-weight:400;margin-top:30rpx;color:#FFFFFF;">最全的折扣券平台</view>
     <view class="search-box" style="margin-top:60rpx;">
       <icon type="search" size="16" style="height:16px;" color="#76707C"/>
-      <input placeholder="粘贴宝贝标题，先领券，在购物" bindconfirm="handleSearch" bindinput='handleInput'/>
+      <input placeholder="粘贴宝贝标题，先领券，在购物" style="width:600rpx;" bindconfirm="handleSearch" bindinput='handleInput'/>
     </view>
     <image class="wave" src="/images/more/wave.png" mode="aspectFill"></image>
     <image class="wave wave-bg" src="/images/more/wave.png" mode="aspectFill"></image>
   </view>
    <view class="goods-container">
-    <block wx:for="{{coupons}}" wx:key="numIid">
+    <block wx:for="{{coupons}}" wx:key="outerId">
       <view class="goods-box"
-        data-id="{{item.numIid}}"
+        data-id="{{item.outerId}}"
         data-url="{{item.itemUrl}}"
         bindtap='couponTap' 
       >
@@ -36,8 +36,7 @@
           <view style="margin-bottom:10rpx;">
             <view class="coupon-info">
               <view class="goods-coupon">领券{{item.couponInfo}}</view>
-
-              <view class="goods-volume" wx:if="{{item.volume}}">{{item.platform}}销量{{item.volume}}</view>
+              <view class="goods-volume" wx:if="{{item.volume}}">{{item.platformText}}销量{{item.volume}}</view>
             </view>
           </view>
         </view>
