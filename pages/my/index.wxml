@@ -4,7 +4,7 @@
       <image src="{{userInfo.avatarUrl}}"></image>
       <view class="nick-name">{{userInfo.nickName}}</view>
     </view>
-    <view class="score">积分：100 </view>
+    <!-- <view class="score">积分：100 </view> -->
   </view>
 <!--
   <view class="my-container">
