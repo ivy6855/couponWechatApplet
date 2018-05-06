@@ -29,7 +29,7 @@ const getCouponsByPage = function (that, page, queryTitle) {
   that.setData({ onAjax: true, loadmoreDisplay: 'block' })
   utils.requestGet("coupon/wechat/main/coupons", params, function (resp) {
     that.setData({loading:false});
-    that.setData({ onAjax: false, loadmoreDisplay: 'none' })
+    that.setData({ onAjax: false, loadmoreDisplay: 'none',loading:false })
     wx.hideLoading();
     if (resp.state != 'success') {
       return false;
@@ -154,6 +154,9 @@ Page({
     var queryPage = this.data.currentPage + 1;
     if (queryPage > this.data.pageCount) {
       //已经是最后一页了
+      return false;
+    }
+    if (this.data.loading) {
       return false;
     }
     self.setData({ loading: true });

@@ -147,7 +147,7 @@ const getCouponsByPage = function (that, page,cType) {
   });
   that.setData({ onAjax: true, loadmoreDisplay: 'block' })
   utils.requestGet("coupon/wechat/main/coupons", params, function (resp) {
-    that.setData({ onAjax: false, loadmoreDisplay: 'none' })
+    that.setData({ onAjax: false, loadmoreDisplay: 'none',loading:false })
     wx.hideLoading();
     if (resp.state != 'success') {
       return false;
@@ -315,11 +315,10 @@ Page({
       //已经是最后一页了
       return false;
     }
-    console.log("加载分页")
-    self.setData({ loading: true })
     if(this.data.loading){
       return false;
     }
+    self.setData({ loading: true })
     getCouponsByPage(this, queryPage, self.data.catalog)
   },
   handleToTop:function(){

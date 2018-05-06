@@ -11,7 +11,7 @@ const getByPage = function (that, page) {
     return false;
   }
   if (that.data.pageCount && that.data.pageCount < q_page) {
-    that.setData({ nomoreDisplay: 'block' });
+    that.setData({ nomoreDisplay: 'block',loading:false });
     return false;
   }
   var params = {
@@ -61,6 +61,7 @@ Page({
     accessLogs:[],
     loading:false,
     onDelFlag:false,
+    onAjax:false,
     delBtnWidth: 120,    //删除按钮宽度单位（rpx）
   },
 
