@@ -130,7 +130,16 @@ Page({
   
   },
   couponTap: function (e) {
+    // console.log(e)
+    // debugger
+    const list = this.data.accessLogs
+    for (let i = 0; i < list.length; i++) {
+      if(list[i].onDel==true){
+        return false;
+      }
+    }
     if (this.data.onDelFlag){
+      this.setData({ onDelFlag:false})
       return false;
     }
     const navigateUrl = e.currentTarget.dataset.url;
@@ -163,11 +172,12 @@ Page({
         }
       }
       var list = this.data.accessLogs;
-      if (index != "" && index != null) {
+      if (index !== "" && index != null) {
         list[parseInt(index)].left = left;
         this.setData({ accessLogs:list});
       }
     }
+    this.setData({ onDelFlag:true});
   },
   touchE: function (e) {
     var index = e.currentTarget.dataset.index;
@@ -178,13 +188,20 @@ Page({
       //如果距离小于删除按钮的1/2，不显示删除按钮
       var left = disX > delBtnWidth / 2 ? "margin-left:-" + delBtnWidth + "rpx" : "margin-left:0px";
       var list = this.data.accessLogs;
-      if (index != "" && index != null) {
-        list[parseInt(index)].left = left;
-        this.setData({ accessLogs: list });
+      // if (index !== "" && index != null) {
+      //   list[parseInt(index)].left = left;
+      //   // this.setData({ accessLogs: list });
+      // }
+
+      for (let i = 0; i < list.length; i++) {
+        list[i].left = "margin-left:0px";
+        list[i].onDel = false;
       }
       if (disX > delBtnWidth / 2 ){
-        this.setData({onDelFlag:true})
+        list[parseInt(index)].left = left;
+        list[parseInt(index)].onDel = true;
       }
+      this.setData({ accessLogs: list });
     }
   },
   delItem:function(event){
@@ -203,6 +220,7 @@ Page({
           icon: 'success',
           duration: 1000
         })
+        // self.setData({ onDelFlag: false })
         list.splice(index, 1);
         self.setData({ accessLogs: list });
       }
