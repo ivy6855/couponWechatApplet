@@ -25,7 +25,7 @@ const banners = [{
 const types = [
   {
     cid: 0,
-    imageUrl: '/images/types/10-all.png',
+    imageUrl: '/images/types/其他.png',
   },{
     cid: 1,
     imageUrl: '/images/types/02-women.png',
@@ -34,37 +34,34 @@ const types = [
     imageUrl: '/images/types/03-man.png',
   }, {
     cid: 3,
-    imageUrl: '/images/types/02-women.png',
+    imageUrl: '/images/types/内衣配饰.png',
   },  {
     cid: 4,
-    imageUrl: '/images/types/07-beauty.png',
+    imageUrl: '/images/types/母婴玩具.png',
   }, {
     cid: 5,
     imageUrl: '/images/types/07-beauty.png',
   }, {
     cid: 6,
-    imageUrl: '/images/types/05-shoes.png',
+    imageUrl: '/images/types/居家生活.png',
   }, {
     cid: 7,
     imageUrl: '/images/types/06-bag.png',
   }, {
     cid: 8,
-    imageUrl: '/images/types/06-bag.png',
+    imageUrl: '/images/types/食品保健.png',
   }, {
     cid: 9,
-    imageUrl: '/images/types/08-appliance.png',
+    imageUrl: '/images/types/文体车品.png',
   }, {
     cid: 10,
-    imageUrl: '/images/types/09-phone.png',
+    imageUrl: '/images/types/08-appliance.png',
   }, {
     cid: 11,
-    imageUrl: '/images/types/10-all.png',
+    imageUrl: '/images/types/户外运动.png',
   }, {
     cid: 12,
-    imageUrl: '/images/types/10-all.png',
-  }, {
-    cid: 13,
-    imageUrl: '/images/types/10-all.png',
+    imageUrl: '/images/types/其他.png',
   }, {
     cid: null,
     imageUrl: '/images/types/10-all.png',
