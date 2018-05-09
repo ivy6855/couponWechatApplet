@@ -148,7 +148,14 @@ Page({
       title: '加载中...'
     })
     const numIid = e.currentTarget.dataset.id;
-    utils.requestGet("coupon/wechat/itemcoupon/" + numIid + "/taobao", {}, function (res) {
+    const outid = e.currentTarget.dataset.outid;
+    let url = "";
+    if(numIid){
+      url = "coupon/wechat/itemcoupon/" + numIid + "/taobao";
+    }else if(outid){
+      url = "coupon/wechat/itemcoupon/connect/" + outid + "/taobao";
+    }
+    utils.requestGet(url, {}, function (res) {
       if (res.state != "success") {
         wx.showToast({
           title: '领取失败',
@@ -175,22 +182,21 @@ Page({
     })
   },
   customServiceHandle: function (e) {
-    // return false
-    // const coupon = this.data.itemcoupon;
-    // const sendMsg = {
-    //   "touser": app.globalData.openid,
-    //   "description": coupon.itemDescription,
-    //   "title": coupon.title,
-    //   'url': coupon.couponClickUrl,
-    //   "thumb_url":coupon.pictUrl
-    // }
-    // utils.requestGet("customer/service/send/linkmessage", sendMsg,function(resp){
-    //   if(resp.state!="success"){
-    //     wx.showToast({
-    //       title: '领取失败',
-    //     })
-    //   }
-    // })
+    const coupon = this.data.itemcoupon;
+    const sendMsg = {
+      "touser": app.globalData.openid,
+      "description": coupon.itemDescription,
+      "title": coupon.title,
+      'url': coupon.couponClickUrl,
+      "thumb_url":coupon.pictUrl
+    }
+    utils.requestGet("customer/service/send/linkmessage", sendMsg,function(resp){
+      if(resp.state!="success"){
+        wx.showToast({
+          title: '领取失败',
+        })
+      }
+    })
 
    
   },

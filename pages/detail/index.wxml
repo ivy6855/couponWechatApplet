@@ -38,7 +38,7 @@
       </button>
       <block wx:else>
         <view class="coupon-paper" bindtap="handleGetCoupon"
-         data-id="{{itemcoupon.numIid}}"  data-platform="{{itemcoupon.platform}}">
+         data-id="{{itemcoupon.numIid}}" data-outid="{{itemcoupon.outerId}}"  data-platform="{{itemcoupon.platform}}">
           <view class="dotted l"></view>
           <view class="dotted r"></view>
           <view class="paper">
