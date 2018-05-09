@@ -15,6 +15,8 @@
           <view class="title">{{item.itemCouponVo.title}}</view>
           <view class="coupon-info">
             <view class="coupon-price">¥{{item.itemCouponVo.zkFinalPrice}}</view>
+            <view class="original" >原价{{item.itemCouponVo.originalPrice}}</view>
+
             <!-- <view class="goods-coupon">{{item.itemCouponVo.couponInfo}}</view> -->
           </view>
         </view>

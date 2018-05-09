@@ -47,14 +47,15 @@
         bindtap='couponTap' 
       >
         <view>
-          <image 
-            src="{{item.pictUrl}}"/>
-          <view class="goods-title">{{item.title}}</view>
+          <image src="{{item.pictUrl}}"/>
+          <view class="goods-title">
+            <view  class="taobao-logo">
+            <image src="/images/taobao.jpeg" mode="aspectFit" /></view>{{item.title}}</view>
         </view>
         <view class="goods-info">
           <view class="price-info">
             <view class="goods-price" style="margin-bottom:5rpx;">
-              到手价{{item.zkFinalPrice}}
+              券后价{{item.zkFinalPrice}}
             </view>
             <view class="original">原价{{item.originalPrice}}</view>
           </view>

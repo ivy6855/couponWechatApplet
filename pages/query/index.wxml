@@ -30,7 +30,7 @@
         <view class="goods-info">
           <view class="price-info">
             <view class="goods-price" style="margin-bottom:5rpx;">
-              到手价{{item.zkFinalPrice}}
+              券后价{{item.zkFinalPrice}}
             </view>
             <view class="original">原价{{item.originalPrice}}</view>
           </view>

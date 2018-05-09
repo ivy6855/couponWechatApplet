@@ -64,3 +64,13 @@
   padding:10rpx 0 10rpx 20rpx;
   box-sizing:border-box;
 }
+.coupon-info{
+  display: flex;
+  justify-content: space-between;
+}
+.original {
+  line-height:auto;
+  color:#8F8F8F;
+  text-decoration:line-through;
+  padding-top:14rpx;
+}

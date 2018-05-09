@@ -182,3 +182,15 @@ swiper-item image {
   font-size: 12px;
   color: #8F8F8F;
 } */
+.goods-title .taobao-logo{
+  display: inline-block;
+  width: 30rpx;
+  height: 30rpx;
+  vertical-align: text-bottom;
+  margin-right: 5rpx;
+}
+.goods-title .taobao-logo image{
+  width: 100%;
+  height: 100%;
+  border-radius:6rpx;
+}

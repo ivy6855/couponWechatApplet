@@ -37,6 +37,8 @@ const getByPage = function (that, page) {
     }
     for (let i = 0; i < accessLogs.length; i++) {
       // accessLogs[i].left=0;
+      accessLogs[i].itemCouponVo.originalPrice = (parseFloat(accessLogs[i].itemCouponVo.couponInfo) + parseFloat(accessLogs[i].itemCouponVo.zkFinalPrice)).toFixed(2);
+
       accessLogs[i].timer = dateUtils.getChsDate(accessLogs[i].operTime);
       if (i > 0) {
         accessLogs[i].preTimer = dateUtils.getChsDate(accessLogs[i - 1].operTime);

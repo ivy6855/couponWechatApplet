@@ -171,7 +171,13 @@ Page({
         self.setData({
           taokl: res.data,
           showToastFlg: true
-        })
+        });
+        wx.setClipboardData({
+          data: res.data,
+          success: function (res) {
+            console.log(res);
+          }
+        });
       }
     })
   },
@@ -201,11 +207,11 @@ Page({
    
   },
   handelBeforeService: function (e) {
-    // wx.setClipboardData({
-    //   data: 'jd:' + this.data.itemcoupon.outerId,
-    //   success: function (res) {
-    //     console.log(res);
-    //   }
-    // });
+    wx.setClipboardData({
+      data: 'jd:' + this.data.itemcoupon.outerId,
+      success: function (res) {
+        console.log(res);
+      }
+    });
   }
 });
