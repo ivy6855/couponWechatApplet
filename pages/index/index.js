@@ -174,7 +174,10 @@ const doQuery = function(self,value){
           return false;
         }
       }
-      hisArr.push({ key: hisArr.length, value: value });
+      if (hisArr.length>9){
+        hisArr.splice(-1)
+      }
+      hisArr.unshift({ key: hisArr.length, value: value });
       wx.setStorage({
         key: "query-histroy",
         data: hisArr
