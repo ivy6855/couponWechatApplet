@@ -126,3 +126,18 @@
   height: 100%;
   width:100%;
 }
+
+.tag{
+  display: inline-block;
+  font-size: 12px;
+  padding: 6rpx 20rpx;
+  background-color:#F1F2F4;
+  color: #000;
+  border-radius: 4rpx;
+  margin-left: 20rpx;
+}
+.division{
+  height: 1rpx;
+  border-top:1rpx solid #D8D8D8;
+  box-sizing: border-box;
+}

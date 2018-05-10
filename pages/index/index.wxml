@@ -30,7 +30,7 @@
   <view class="search-container {{onQuery?'active':''}}">
     <view class="query {{onQuery?'active':''}}">
       <icon type="search" size="16" style="margin-top:15rpx;margin-left:15rpx;" color="#76707C"/>
-      <input placeholder="粘贴宝贝标题，先领券，在购物" class="{{onQuery?'active':''}}"   
+      <input placeholder="粘贴宝贝标题，先领券，在购物" class="{{onQuery?'active':''}} input"   
             bindfocus="queryFocusHandle"
             value="{{queryValue}}"
             bindconfirm="queryHandle"/>
@@ -39,6 +39,7 @@
        class="cancel" bindtap="cancelQueryHandle">取消</view>
   </view>
   <view class="search-bg" wx:if="{{onQuery}}"></view>
+
   <view class="goods-container">
     <block wx:for="{{coupons}}" wx:key="numIid">
       <view class="goods-box"
@@ -50,7 +51,10 @@
           <image src="{{item.pictUrl}}"/>
           <view class="goods-title">
             <view  class="taobao-logo">
-            <image src="/images/taobao.jpeg" mode="aspectFit" /></view>{{item.title}}</view>
+              <image src="/images/taobao.jpeg" mode="aspectFit" wx:if="{{item.platform=='taoke'}}"/>
+              <image src="/images/jd.jpg" mode="aspectFit" wx:if="{{item.platform=='jingtuitui'}}"/>
+            </view>{{item.title}}
+          </view>
         </view>
         <view class="goods-info">
           <view class="price-info">
@@ -74,6 +78,14 @@
     <text>努力加载中...</text>
   </view>
 </scroll-view>
+
+<view class="search-histroy" wx:if="{{onQuery}}">
+   <view class="division" style="margin-bottom:10rpx;"></view> 
+  <block wx:for="{{histroy}}" wx:key="key">
+    <view class="tag" data-value="{{item.value}}" style="margin:20rpx;" bindtap='histroyTapHandle'>{{item.value}}</view>
+  </block>
+</view>
+
 <view class="to-top" bindtap='handleToTop' style="display:{{showTop?'block':'none'}}">
   <image mode="aspectFit" src="/images/top.png"></image>
 </view>

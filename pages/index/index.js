@@ -162,6 +162,31 @@ const getCouponsByPage = function (that, page,cType) {
   });
 }
 
+//执行查询
+const doQuery = function(self,value){
+  let hisArr = self.data.histroy;
+  wx.navigateTo({
+    url: '/pages/query/index?title=' + value,
+    success: function () {
+      self.setData({ onQuery: false })
+      for (let i = 0; i < hisArr.length;i++){
+        if(hisArr[i].value==value){
+          return false;
+        }
+      }
+      hisArr.push({ key: hisArr.length, value: value });
+      wx.setStorage({
+        key: "query-histroy",
+        data: hisArr
+      })
+    },
+    complete: function () {
+      self.setData({ onQuery: false, queryValue: null, histroy: hisArr });
+    }
+  })
+}
+
+
 Page({
 
   /**
@@ -170,7 +195,7 @@ Page({
   data: {
     onAjax:false,
     loading:false,
-    onQuery:false,
+    onQuery:true,
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
@@ -180,7 +205,8 @@ Page({
     types:types,
     coupons: [],
     scrollTop:0,
-    showTop:false
+    showTop:false,
+    histroy:[]
   },
 
   /**
@@ -203,7 +229,16 @@ Page({
       }
       menus.push({ cid: null, name: '全部', imageUrl:'/images/types/10-all.png'})
       self.setData({ types: menus})
+    });
+
+    wx.getStorage({
+      key: 'query-histroy',
+      success: function (res) {
+        console.log(res.data)
+        self.setData({histroy:res.data||[]});
+      }
     })
+
   },
 
   /**
@@ -288,15 +323,8 @@ Page({
   queryHandle:function(e){
     const self = this;
     const value = e.detail.value;
-    wx.navigateTo({
-      url: '/pages/query/index?title='+value,
-      success:function(){
-
-      },
-      complete:function(){
-        self.setData({ onQuery: false,queryValue:null });
-      }
-    })
+    doQuery(self,value);
+    
   },
   cancelQueryHandle:function(e){
     this.setData({onQuery:false})
@@ -320,5 +348,10 @@ Page({
   },
   handleToTop:function(){
     this.setData({ scrollTop: 0, showTop:false})
+  },
+  histroyTapHandle:function(e){
+    const self = this;
+    const value = e.currentTarget.dataset.value;
+    doQuery(self,value);
   }
 })

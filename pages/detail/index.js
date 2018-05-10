@@ -188,30 +188,30 @@ Page({
     })
   },
   customServiceHandle: function (e) {
-    const coupon = this.data.itemcoupon;
-    const sendMsg = {
-      "touser": app.globalData.openid,
-      "description": coupon.itemDescription,
-      "title": coupon.title,
-      'url': coupon.couponClickUrl,
-      "thumb_url":coupon.pictUrl
-    }
-    utils.requestGet("customer/service/send/linkmessage", sendMsg,function(resp){
-      if(resp.state!="success"){
-        wx.showToast({
-          title: '领取失败',
-        })
-      }
-    })
+    // const coupon = this.data.itemcoupon;
+    // const sendMsg = {
+    //   "touser": app.globalData.openid,
+    //   "description": coupon.itemDescription,
+    //   "title": coupon.title,
+    //   'url': coupon.couponClickUrl,
+    //   "thumb_url":coupon.pictUrl
+    // }
+    // utils.requestGet("customer/service/send/linkmessage", sendMsg,function(resp){
+    //   if(resp.state!="success"){
+    //     wx.showToast({
+    //       title: '领取失败',
+    //     })
+    //   }
+    // })
 
    
   },
   handelBeforeService: function (e) {
-    wx.setClipboardData({
-      data: 'jd:' + this.data.itemcoupon.outerId,
-      success: function (res) {
-        console.log(res);
-      }
-    });
+    // wx.setClipboardData({
+    //   data: 'jd:' + this.data.itemcoupon.outerId,
+    //   success: function (res) {
+    //     console.log(res);
+    //   }
+    // });
   }
 });
