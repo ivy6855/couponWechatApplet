@@ -198,7 +198,7 @@ Page({
   data: {
     onAjax:false,
     loading:false,
-    onQuery:true,
+    onQuery:false,
     indicatorDots: true,
     autoplay: true,
     interval: 3000,
