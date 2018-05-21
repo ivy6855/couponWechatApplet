@@ -102,8 +102,8 @@ Page({
   },
   handleSearch:function(event){
     const self = this;
-    // queryPageByPlatform(self, 1,"jingtuitui")
-    queryPageByPlatform(self, 1,"taoke")
+    queryPageByPlatform(self, 1,"jingtuitui")
+    // queryPageByPlatform(self, 1,"taoke")
     
   },
   handleToTop: function () {
