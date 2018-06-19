@@ -39,9 +39,11 @@ Page({
     indicatorDots: true,
     autoplay: true,
     showToastFlg:false,
+    canCoupon:true,
     taokl:'复制框内整段文字，{model}，打开「手淘」即可「领取优惠券」并购买',
     interval: 3000,
     banners:[],
+    couponSuccess:true,
     itemcoupon:{}
   },
 
@@ -138,5 +140,91 @@ Page({
     this.setData({
       swiperCurrent: e.detail.current
     })
+  },
+  handleGetCoupon:function(e){
+    const self = this;
+    const platform = e.currentTarget.dataset.platform;
+    if (!e.currentTarget.dataset.can) {
+      return false;
+    }
+    //领券
+    //淘宝
+    wx.showToast({
+      title: '加载中...'
+    })
+    const numIid = e.currentTarget.dataset.id;
+    const outid = e.currentTarget.dataset.outid;
+    let url = "";
+    if(numIid){
+      url = "coupon/wechat/itemcoupon/" + numIid + "/taobao";
+    }else if(outid){
+      url = "coupon/wechat/itemcoupon/connect/" + outid + "/taobao";
+    }
+    utils.requestGet(url, {}, function (res) {
+      if (res.state != "success") {
+        wx.showToast({
+          title: '领取失败',
+          icon: 'fail',
+          duration: 2000
+        });
+        self.setData({ canCoupon: false })
+      } else {
+        wx.showToast({
+          title: '领取成功',
+          icon: 'success',
+          duration: 1000
+        })
+        self.setData({
+          taokl: res.data,
+          showToastFlg: true
+        });
+        wx.setClipboardData({
+          data: res.data,
+          success: function (res) {
+            console.log(res);
+          }
+        });
+      }
+    })
+  },
+  handleClose:function(e){
+    this.setData({
+      taokl: '',
+      showToastFlg: false
+    })
+  },
+  customServiceHandle: function (e) {
+    //TODO 京东领券
+    const coupon = this.data.itemcoupon;
+    const self  = this;
+    if(!e.currentTarget.dataset.can){
+      return false;
+    }
+    const sendMsg = {
+      "touser": app.globalData.openid,
+      "description": coupon.itemDescription,
+      "title": coupon.title,
+      'url': coupon.couponClickUrl,
+      "thumb_url":coupon.pictUrl
+    }
+    utils.requestGet("customer/service/send/linkmessage", sendMsg,function(resp){
+      if(resp.state!="success"){
+        wx.showToast({
+          title: '领取失败',
+        });
+        self.setData({ canCoupon:false})
+      }
+    })
+
+   
+  },
+  handelBeforeService: function (e) {
+    //TODO
+    wx.setClipboardData({
+      data: 'jd:' + this.data.itemcoupon.outerId,
+      success: function (res) {
+        console.log(res);
+      }
+    });
   }
 });

@@ -23,9 +23,13 @@
         bindtap='couponTap' 
       >
         <view>
-          <image 
-            src="{{item.pictUrl}}"/>
-          <view class="goods-title">{{item.title}}</view>
+          <image src="{{item.pictUrl}}"/>
+          <view class="goods-title">
+            <view  class="taobao-logo">
+              <image src="/images/taobao.jpeg" mode="aspectFit" wx:if="{{item.platform=='taoke'}}"/>
+              <image src="/images/jd.jpg" mode="aspectFit" wx:if="{{item.platform=='jingtuitui'}}"/>
+            </view>{{item.title}}
+          </view>
         </view>
         <view class="goods-info">
           <view class="price-info">

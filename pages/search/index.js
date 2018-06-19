@@ -4,7 +4,7 @@ const app = getApp();
 const couponHelp = require("../../utils/coupon-help.js");
 
 
-const queryPageByPlatform = function(that,page,flatform){
+const queryPageByPlatform = function(that,page,flatform,nextFun){
     // http://127.0.0.1:8181/coupon-wechat/coupon/wechat/itemcoupon/listconnect?type=jingtuitui&name=宝宝
   const queryValue = that.data.queryValue;
   if(queryValue==null||queryValue==""||queryValue==undefined){
@@ -16,12 +16,16 @@ const queryPageByPlatform = function(that,page,flatform){
   utils.request("coupon/wechat/itemcoupon/listconnect?type="+flatform+"&name=" + queryValue, {}, function (resp) {
     wx.hideLoading();
     if(resp&&resp.data){
-      const coupons = that.data.coupons.concat(resp.data.dataList || []);
+      let coupons = resp.data.dataList || [];
       for(let i=0;i<coupons.length;i++){
         coupons[i].platform = flatform;
       }
       couponHelp.deal(coupons);
+      coupons = that.data.coupons.concat(coupons);
       that.setData({ coupons: coupons })
+    }
+    if(nextFun){
+      nextFun();
     }
   });
 }
@@ -102,8 +106,10 @@ Page({
   },
   handleSearch:function(event){
     const self = this;
-    queryPageByPlatform(self, 1,"jingtuitui")
-    // queryPageByPlatform(self, 1,"taoke")
+    self.setData({ coupons:[]})
+    queryPageByPlatform(self, 1,"jingtuitui",function(){
+      queryPageByPlatform(self, 1, "taoke")
+    })
     
   },
   handleToTop: function () {

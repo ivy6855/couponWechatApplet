@@ -27,23 +27,39 @@
   </view>
   <view class="coupon-con">
     <!-- TODO -->
-      <button wx:if="{{itemcoupon.platform=='JD'}}" class="coupon-paper"  open-type='contact'
-        data-id="{{itemcoupon.numIid}}"  data-platform="{{itemcoupon.platform}}">
+      <button wx:if="{{itemcoupon.platform=='jingtuitui'}}" class="coupon-paper {{canCoupon?'':'disabled'}}"  open-type='contact'
+        data-id="{{itemcoupon.numIid}}"  data-platform="{{itemcoupon.platform}}" data-can="{{canCoupon}}"
+         bindcontact="customServiceHandle" bindtap="handelBeforeService">
           <view class="dotted l"></view>
           <view class="dotted r"></view>
           <view class="paper">
             <text>{{itemcoupon.couponInfo}}元优惠券</text>
           </view>
+          <view class="get">立即领券</view>
       </button>
       <block wx:else>
-        <view class="coupon-paper"
+        <view class="coupon-paper {{canCoupon?'':'disabled'}}" bindtap="handleGetCoupon" data-can="{{canCoupon}}"
          data-id="{{itemcoupon.numIid}}" data-outid="{{itemcoupon.outerId}}"  data-platform="{{itemcoupon.platform}}">
           <view class="dotted l"></view>
           <view class="dotted r"></view>
           <view class="paper">
             <text>{{itemcoupon.couponInfo}}元优惠券</text>
           </view>
+          <view class="get">立即领券</view>
         </view>
       </block>
   </view>
+
+
+  <view class="toast" style="display:{{showToastFlg?'block':'none'}}">
+    <view class="taobao">
+      <text selectable="true">{{taokl}}</text>
+    </view>
+     <view class="tip">淘口令已经复制，打开淘宝即可领券下单</view> 
+    <view class="close">
+      <icon type="cancel" size="30" style="padding:30rpx;" color="rgb(255,255,255)" bindtap="handleClose"/>
+    </view>
+  </view>
+    <!-- <view class="tip">请点一下上方白色框，需要手动 长按 全选 复制框内淘口令，然后打开淘宝即可领券下单</view> -->
+  
 </view>
