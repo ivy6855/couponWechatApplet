@@ -79,6 +79,11 @@ App({
                 // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
                 setUserInfo(res1.code, self);
               } else {
+                wx.hideLoading();
+                wx.navigateTo({
+                  url: '/pages/auth/index?from=index&code=' + res1.code
+                })
+                return false
                 wx.authorize({
                   scope: 'scope.userInfo',
                   success(res) {
@@ -86,7 +91,7 @@ App({
                     console.log(res)
                     setUserInfo(res1.code, self);
                   },
-                  fail: function () {
+                  fail: function (res) {
                     // wx.showModal({
                     //   title: '用户未授权',
                     //   content: '如需正常使用测试功能，请按确定并在授权管理中选中“用户信息”，然后点确定。最后再重新进入小程序即可正常使用',

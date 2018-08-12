@@ -1,0 +1,25 @@
+/* pages/auth/index.wxss */
+
+.top-logo {
+  height: 300px;
+}
+
+.logo {
+  height: 240px;
+  width: 240px;
+  position: absolute;
+  right: 0;
+  left: 0;
+  top:10px;
+  margin: 0 auto;
+}
+
+.auth-btn {
+  background-color: #ff002a;
+  margin: 100px 100px 0 100px;
+  /* padding: 10px 0; */
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+}

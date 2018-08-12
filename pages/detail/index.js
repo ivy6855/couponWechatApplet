@@ -58,6 +58,7 @@ Page({
       title: '加载中...',
     });
     if(type=="outer"){
+      console.log(app.globalData)
       //访问外部详情，numIid为outterid
       utils.requestGet("coupon/wechat/itemcoupon/connect/" + numIid + "/" + app.globalData.USER_ID, {}, function (res) {
         wx.hideLoading()

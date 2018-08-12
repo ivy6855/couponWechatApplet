@@ -1,0 +1,13 @@
+<!--pages/auth/index.wxml-->
+<view>
+  <view class="top-logo">
+    <image src="../../images/menu/logo.png" class="logo"></image>
+  </view>
+  <view style="text-align:center;font-size:14px;">需要授权才能使用</view>
+  <view style="text-align:center;color:#777;font-size:14px;">不会将您的信息提供给第三方</view>
+
+  <!-- <button type="default" open-type="getUserInfo" >去授权</button> -->
+  <!-- <view class="auth-btn" bindtap='goAuthSetting'>去授权</view> -->
+  <button  class="auth-btn" open-type="getUserInfo" bindgetuserinfo="getUserInfo">授权</button>
+
+</view>

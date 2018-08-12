@@ -226,6 +226,8 @@ Page({
 
     //菜单
     utils.requestGet("coupon/wechat/main/menu", {}, function (res) {
+      console.log("菜单")
+      console.log(res)
       let menus = res.data||[];
       for(let i=0;i<menus.length;i++){
         menus[i]["imageUrl"] = types[menus[i].cid]["imageUrl"];

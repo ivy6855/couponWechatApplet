@@ -7,11 +7,11 @@
 		"urlCheck": false,
 		"es6": true,
 		"postcss": true,
-		"minified": true,
+		"minified": false,
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "1.7.4",
+	"libVersion": "2.2.2",
 	"appid": "wx06f9eec05ead059a",
 	"projectname": "couponWechatApplet",
 	"isGameTourist": false,
